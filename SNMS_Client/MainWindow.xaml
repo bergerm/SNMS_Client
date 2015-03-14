@@ -1,0 +1,131 @@
+﻿<Window x:Class="SNMS_Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Social Network Manipulation System" Height="700" Width="1300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FF746F6F">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TabControl HorizontalAlignment="Left" Height="671" Margin="0,0,-1176,-639" VerticalAlignment="Top" Width="1294">
+            <TabItem Header="Plugins" VerticalAlignment="Bottom">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
+                    <Button Content="&lt;-- Add" HorizontalAlignment="Left" Margin="383,588,0,25" VerticalAlignment="Center" Width="75" FontSize="14" Height="30"/>
+                    <TextBox HorizontalAlignment="Left" Margin="463,588,0,25" TextWrapping="Wrap" VerticalAlignment="Center" Width="705" FontSize="14" Height="30" Text="asdasdasd" FontFamily="Arial"/>
+                    <Button Content="Browse Plugin" HorizontalAlignment="Left" Margin="1173,588,0,25" VerticalAlignment="Center" FontSize="14" Height="30"/>
+                    <Rectangle HorizontalAlignment="Left" Height="509" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,102,0,511" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="Plugin Name" HorizontalAlignment="Left" Margin="414,94,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Plugin Description" HorizontalAlignment="Left" Margin="414,156,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,164,0,181" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="298" Text="asdasdasd" FontFamily="Arial"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="Enabled" HorizontalAlignment="Left" Margin="742,502,0,95" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Accounts" VerticalAlignment="Bottom">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
+                    <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,166,0,447" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="Account Name" HorizontalAlignment="Left" Margin="414,158,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Description" HorizontalAlignment="Left" Margin="414,220,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,228,0,297" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="118" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="Account" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,392,0,221" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="User Name" HorizontalAlignment="Left" Margin="414,384,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <PasswordBox HorizontalAlignment="Left" Margin="650,446,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="Password" HorizontalAlignment="Left" Margin="419,438,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Configurations" VerticalAlignment="Bottom">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
+                    <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,241,0,372" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="Conf. Name" HorizontalAlignment="Left" Margin="414,233,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Description" HorizontalAlignment="Left" Margin="414,295,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,303,0,243" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="97" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="650,154,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="Account" HorizontalAlignment="Left" Margin="414,150,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="650,424,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="Sequence" HorizontalAlignment="Left" Margin="414,420,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Sequence Enabled" HorizontalAlignment="Left" Margin="414,467,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Button Content="Enabled" HorizontalAlignment="Left" Margin="764,544,0,53" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <CheckBox Content="" HorizontalAlignment="Left" Margin="653,482,0,0" VerticalAlignment="Top" Height="16" Width="17"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Triggers" Margin="-2,-2,-2,0" VerticalAlignment="Bottom">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
+                    <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,205,0,408" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="Trigger Name" HorizontalAlignment="Left" Margin="414,197,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Description" HorizontalAlignment="Left" Margin="414,259,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,267,0,294" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="82" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox HorizontalAlignment="Left" Margin="650,378,0,235" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="Trigger Value" HorizontalAlignment="Left" Margin="414,370,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <PasswordBox HorizontalAlignment="Left" Margin="650,467,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="Reaction Value" HorizontalAlignment="Left" Margin="415,459,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="650,150,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="Trigger" HorizontalAlignment="Left" Margin="414,146,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="650,419,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="Reaction" HorizontalAlignment="Left" Margin="414,415,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Trigger Enabled" HorizontalAlignment="Left" Margin="742,516,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <CheckBox Content="" HorizontalAlignment="Left" Margin="949,532,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Users" VerticalAlignment="Bottom">
+                <Grid Background="#FFE5E5E5">
+                    <Rectangle HorizontalAlignment="Left" Height="560" Margin="200,36,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="961,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="New" HorizontalAlignment="Left" Margin="226,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="Save" HorizontalAlignment="Left" Margin="367,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="462,74,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <TextBox HorizontalAlignment="Left" Margin="462,143,0,470" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" Text="asdasdasd" FontFamily="Arial"/>
+                    <Label Content="User Name" HorizontalAlignment="Left" Margin="226,135,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="User" HorizontalAlignment="Left" Margin="226,70,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="462,285,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="User Type" HorizontalAlignment="Left" Margin="226,281,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Enable Read Actions" HorizontalAlignment="Left" Margin="496,367,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <CheckBox Content="" HorizontalAlignment="Left" Margin="761,383,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                    <PasswordBox HorizontalAlignment="Left" Margin="462,194,0,0" VerticalAlignment="Top" Width="593" FontSize="24" Password="asdasdsad"/>
+                    <Label Content="Password" HorizontalAlignment="Left" Margin="226,190,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Enable Write Actions" HorizontalAlignment="Left" Margin="496,416,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <CheckBox Content="" HorizontalAlignment="Left" Margin="761,432,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Connection" Margin="-2,-2,-2,0" VerticalAlignment="Bottom">
+                <Grid Background="#FFE5E5E5">
+                    <Rectangle HorizontalAlignment="Left" Height="560" Margin="200,36,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+                    <Label Content="Server Status" HorizontalAlignment="Left" Margin="217,48,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <CheckBox Content="" HorizontalAlignment="Left" Margin="380,64,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Logs" VerticalAlignment="Bottom">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
