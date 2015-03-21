@@ -38,6 +38,10 @@ namespace SNMS_Client
         {
             try
             {
+                ProtocolMessage connectionMessage = new ProtocolMessage();
+                connectionMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_CONNECTION);
+                connectionMessage.AddParameter("client");
+
                 ProtocolMessage pluginsMessage = new ProtocolMessage();
                 pluginsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_PLUGINS);
 
@@ -46,8 +50,13 @@ namespace SNMS_Client
 
                 Stream stream = client.GetStream();
 
-                byte[] response = Protocol.CraftMessage(pluginsMessage);
-                stream.Write(response, 0, response.Length);
+                //byte[] response = Protocol.CraftMessage(pluginsMessage);
+                //stream.Write(response, 0, response.Length);
+                //stream.Flush();
+                ConnectionHandler.SendMessage(stream, connectionMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+                ConnectionHandler.SendMessage(stream, pluginsMessage);
+                responseMessage = ConnectionHandler.GetMessage(stream);
             }
             catch (Exception e)
             {
