@@ -177,6 +177,7 @@ namespace SNMS_Client.Connection
             byteCount += 4;
 
             int numOfParameters = BitConverter.ToInt32(message, byteCount);
+            byteCount += 4;
 
             for (int i = 0; i < numOfParameters; i++)
             {
@@ -186,6 +187,7 @@ namespace SNMS_Client.Connection
                 byte[] tempParameter = new byte[parameterSize];
                 Array.Copy(message, byteCount, tempParameter, 0, parameterSize);
                 parsedMessage.AddParameter(tempParameter, parameterSize);
+                byteCount += parameterSize;
             }
 
             return parsedMessage;

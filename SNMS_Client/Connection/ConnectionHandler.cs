@@ -18,16 +18,19 @@ namespace SNMS_Client.Connection
             try
             {
                 stream.ReadTimeout = CONNECTION_TIMEOUT;
-                byte[] resp = new byte[2048];
+                int bufferSize = 2048;
+                byte[] resp = new byte[bufferSize];
                 int bytesread = stream.Read(resp, 0, 4);
                 int messageLength = BitConverter.ToInt32(resp, 0);
+                int totalRead = 0;
 
                 var memStream = new MemoryStream();
                 bytesread = 0;
-                while (bytesread < messageLength)
+                while (totalRead < messageLength)
                 {
-                    int bytesToRead = Math.Min(resp.Length, messageLength - bytesread);
+                    int bytesToRead = Math.Min(resp.Length, messageLength - totalRead);
                     bytesread = stream.Read(resp, 0, bytesToRead);
+                    totalRead += bytesread;
                     memStream.Write(resp, 0, bytesread);
                 }
 
