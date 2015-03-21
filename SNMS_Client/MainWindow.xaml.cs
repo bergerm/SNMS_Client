@@ -17,6 +17,7 @@ using System.IO;
 using System.Net.Sockets;
 
 using SNMS_Client.Connection;
+using SNMS_Client.Objects;
 
 namespace SNMS_Client
 {
@@ -26,9 +27,11 @@ namespace SNMS_Client
     public partial class MainWindow : Window
     {
         const int TCP_PORT = 56824;
+        static List<Plugin> pluginList;
 
         public MainWindow()
         {
+            pluginList = new List<Plugin>();
             InitializeComponent();
             LoadStartValues();
             //Available_Plugins;
@@ -57,6 +60,12 @@ namespace SNMS_Client
                 ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
                 ConnectionHandler.SendMessage(stream, pluginsMessage);
                 responseMessage = ConnectionHandler.GetMessage(stream);
+
+                pluginList = Plugin.ParseMessage(responseMessage);
+                foreach (Plugin plugin in pluginList)
+                {
+                    Available_Plugins.Items.Add(plugin.GetName());
+                }
             }
             catch (Exception e)
             {
@@ -64,6 +73,32 @@ namespace SNMS_Client
             }
 
             return true;
+        }
+
+        private void Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Available_Plugins.SelectedIndex == -1)
+            {
+                Plugin_Name.Text = "";
+                Plugin_Description.Text = "";
+                Plugin_Enable_Button.Content = "Enabled";
+            }
+            else
+            {
+                Plugin plugin = pluginList[Available_Plugins.SelectedIndex];
+                Plugin_Name.Text = plugin.GetName();
+                Plugin_Description.Text = plugin.GetDescription();
+                bool isEnabled = plugin.GetEnabled();
+                if (isEnabled)
+                {
+                    Plugin_Enable_Button.Content = "Enabled";
+                }
+                else
+                {
+                    Plugin_Enable_Button.Content = "Disabled";
+                }
+                
+            }
         }
     }
 }

@@ -12,7 +12,7 @@
         <TabControl HorizontalAlignment="Left" Height="671" Margin="0,0,-1176,-639" VerticalAlignment="Top" Width="1294">
             <TabItem Header="Plugins" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <ListBox x:Name="Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Button Content="&lt;-- Add" HorizontalAlignment="Left" Margin="383,588,0,25" VerticalAlignment="Center" Width="75" FontSize="14" Height="30"/>
                     <TextBox HorizontalAlignment="Left" Margin="463,588,0,25" TextWrapping="Wrap" VerticalAlignment="Center" Width="705" FontSize="14" Height="30" FontFamily="Arial"/>
@@ -23,7 +23,8 @@
                     <Label Content="Plugin Description" HorizontalAlignment="Left" Margin="414,156,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <TextBox x:Name="Plugin_Description" HorizontalAlignment="Left" Margin="650,164,0,181" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="298" FontFamily="Arial"/>
                     <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="Enabled" HorizontalAlignment="Left" Margin="742,502,0,95" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Plugin_Enable_Button" Content="Enabled" HorizontalAlignment="Left" Margin="742,502,0,95" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button Content="Save" HorizontalAlignment="Left" Margin="438,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Accounts" VerticalAlignment="Bottom">

@@ -135,7 +135,8 @@ namespace SNMS_Client.Connection
                 return "";
             }
 
-            return BitConverter.ToString(array);
+            string str = GetString(array);
+            return str;
         }
     }
 
