@@ -114,6 +114,29 @@ namespace SNMS_Client.Connection
             return AddParameter(arr, arr.Length);
         }
 
+        public bool AddParameter(int num)
+        {
+            byte[] arr = BitConverter.GetBytes(num);
+            return AddParameter(arr, 4);
+        }
+
+        public bool AddParameter(bool b)
+        {
+            int parameter;
+
+            if (b)
+            {
+                parameter = 1;
+            }
+            else
+            {
+                parameter = 0;
+            }
+
+            byte[] arr = BitConverter.GetBytes(parameter);
+            return AddParameter(arr, 4);
+        }
+
         public int GetParameter(ref byte[] parameter, int index)
         {
             if (index < 0 || index >= m_listOfArrays.Count)
@@ -137,6 +160,34 @@ namespace SNMS_Client.Connection
 
             string str = GetString(array);
             return str;
+        }
+
+        public int GetParameterAsInt(int index)
+        {
+            byte[] array = null;
+            int size = GetParameter(ref array, index);
+
+            if (array == null)
+            {
+                return 0;
+            }
+
+            int num = BitConverter.ToInt32(array, 0) ;
+            return num;
+        }
+
+        public bool GetParameterAsBool(int index)
+        {
+            byte[] array = null;
+            int size = GetParameter(ref array, index);
+
+            if (array == null)
+            {
+                return false;
+            }
+
+            int num = BitConverter.ToInt32(array, 0) ;
+            return (num != 0) ? true : false;
         }
     }
 

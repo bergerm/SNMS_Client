@@ -9,10 +9,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TabControl HorizontalAlignment="Left" Height="671" Margin="0,0,-1176,-639" VerticalAlignment="Top" Width="1294">
+        <TabControl x:Name="Main_Tab_Controller" HorizontalAlignment="Left" Height="671" Margin="0,0,-1176,-639" VerticalAlignment="Top" Width="1294" SelectionChanged="Main_Tab_Controller_SelectionChanged">
             <TabItem Header="Plugins" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Available_Plugins_SelectionChanged"/>
+                    <ListBox x:Name="Plugins_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Plugins_Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Button Content="&lt;-- Add" HorizontalAlignment="Left" Margin="383,588,0,25" VerticalAlignment="Center" Width="75" FontSize="14" Height="30"/>
                     <TextBox HorizontalAlignment="Left" Margin="463,588,0,25" TextWrapping="Wrap" VerticalAlignment="Center" Width="705" FontSize="14" Height="30" FontFamily="Arial"/>
@@ -22,118 +22,118 @@
                     <Label Content="Plugin Name" HorizontalAlignment="Left" Margin="414,94,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Plugin Description" HorizontalAlignment="Left" Margin="414,156,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <TextBox x:Name="Plugin_Description" HorizontalAlignment="Left" Margin="650,164,0,181" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="298" FontFamily="Arial"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Plugin_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <Button x:Name="Plugin_Enable_Button" Content="Enabled" HorizontalAlignment="Left" Margin="742,502,0,95" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="Save" HorizontalAlignment="Left" Margin="438,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Plugin_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="463,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Accounts" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <ListBox x:Name="Accounts_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Accounts_Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,166,0,447" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <Button x:Name="Account_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Account_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Account_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <ComboBox x:Name="Account_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Account_ComboBox_SelectionChanged"/>
+                    <TextBox x:Name="Account_Name" HorizontalAlignment="Left" Margin="650,166,0,447" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="Account Name" HorizontalAlignment="Left" Margin="414,158,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Description" HorizontalAlignment="Left" Margin="414,220,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,228,0,297" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="118" FontFamily="Arial"/>
+                    <TextBox x:Name="Account_Description" HorizontalAlignment="Left" Margin="650,228,0,297" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="118" FontFamily="Arial"/>
                     <Label Content="Account" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,392,0,221" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <TextBox x:Name="Account_User_Name" HorizontalAlignment="Left" Margin="650,392,0,221" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="User Name" HorizontalAlignment="Left" Margin="414,384,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <PasswordBox HorizontalAlignment="Left" Margin="650,446,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <PasswordBox x:Name="Account_Password" HorizontalAlignment="Left" Margin="650,446,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Password" HorizontalAlignment="Left" Margin="419,438,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Configurations" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <ListBox x:Name="Configuration_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,241,0,372" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <Button x:Name="Configuration_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Configuration_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Configuration_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <ComboBox x:Name="Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <TextBox x:Name="Configuration_Name" HorizontalAlignment="Left" Margin="650,241,0,372" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="Conf. Name" HorizontalAlignment="Left" Margin="414,233,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Description" HorizontalAlignment="Left" Margin="414,295,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,303,0,243" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="97" FontFamily="Arial"/>
+                    <TextBox x:Name="Configuration_Description" HorizontalAlignment="Left" Margin="650,303,0,243" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="97" FontFamily="Arial"/>
                     <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,154,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <ComboBox x:Name="Account_ComboBox1" HorizontalAlignment="Left" Margin="650,154,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Account" HorizontalAlignment="Left" Margin="414,150,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,424,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <ComboBox x:Name="Configuration_Sequence_ComboBox" HorizontalAlignment="Left" Margin="650,424,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Sequence" HorizontalAlignment="Left" Margin="414,420,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Sequence Enabled" HorizontalAlignment="Left" Margin="414,467,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <Button Content="Enabled" HorizontalAlignment="Left" Margin="764,544,0,53" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <CheckBox Content="" HorizontalAlignment="Left" Margin="653,482,0,0" VerticalAlignment="Top" Height="16" Width="17"/>
+                    <Button x:Name="Configuration_Enabled_Button" Content="Enabled" HorizontalAlignment="Left" Margin="764,544,0,53" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <CheckBox x:Name="Configuration_Sequence_Enabled_CheckBox" Content="" HorizontalAlignment="Left" Margin="653,482,0,0" VerticalAlignment="Top" Height="16" Width="17"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Trigger Types" Margin="-2,0" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <ListBox x:Name="TriggerTypes_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,205,0,408" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <Button x:Name="TriggerTypes_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="TriggerTypes_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="TriggerTypes_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <ComboBox x:Name="TriggersTypes_Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <TextBox x:Name="TriggerTypes_Name" HorizontalAlignment="Left" Margin="650,205,0,408" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="Trigger Type Name" HorizontalAlignment="Left" Margin="414,197,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Description" HorizontalAlignment="Left" Margin="414,259,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,267,0,167" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="209" FontFamily="Arial"/>
+                    <TextBox x:Name="TriggerTypes_Description" HorizontalAlignment="Left" Margin="650,267,0,167" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="209" FontFamily="Arial"/>
                     <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,150,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <ComboBox x:Name="TriggerTypes_ComboBox" HorizontalAlignment="Left" Margin="650,150,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Trigger Type" HorizontalAlignment="Left" Margin="414,146,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Triggers" Margin="-2,-2,-2,0" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <ListBox x:Name="Trigger_Available_Plugin" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,263,0,350" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <Button x:Name="Trigger_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Trigger_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Trigger_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <ComboBox x:Name="Trigger_Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <TextBox x:Name="Trigger_Name" HorizontalAlignment="Left" Margin="650,263,0,350" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="Trigger Name" HorizontalAlignment="Left" Margin="414,255,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Description" HorizontalAlignment="Left" Margin="414,302,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,310,0,281" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="52" FontFamily="Arial"/>
+                    <TextBox x:Name="Trigger_Description" HorizontalAlignment="Left" Margin="650,310,0,281" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="52" FontFamily="Arial"/>
                     <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <TextBox HorizontalAlignment="Left" Margin="650,378,0,235" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <TextBox x:Name="Trigger_Value" HorizontalAlignment="Left" Margin="650,378,0,235" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="Trigger Value" HorizontalAlignment="Left" Margin="414,370,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <PasswordBox HorizontalAlignment="Left" Margin="650,467,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <PasswordBox x:Name="Trigger_Reaction_Value" HorizontalAlignment="Left" Margin="650,467,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Reaction Value" HorizontalAlignment="Left" Margin="415,459,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,150,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <ComboBox x:Name="Trigger_TriggerType_ComboBox" HorizontalAlignment="Left" Margin="650,150,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Trigger Type" HorizontalAlignment="Left" Margin="414,146,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,419,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <ComboBox x:Name="Trigger_Reaction_ComboBox" HorizontalAlignment="Left" Margin="650,419,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Reaction" HorizontalAlignment="Left" Margin="414,415,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Trigger Enabled" HorizontalAlignment="Left" Margin="742,516,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <CheckBox Content="" HorizontalAlignment="Left" Margin="949,532,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="650,204,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <CheckBox x:Name="Trigger_Enabled_CheckBox" Content="" HorizontalAlignment="Left" Margin="949,532,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                    <ComboBox x:Name="Trigger_ComboBox" HorizontalAlignment="Left" Margin="650,204,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Trigger" HorizontalAlignment="Left" Margin="414,200,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Users" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="200,36,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="961,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="New" HorizontalAlignment="Left" Margin="226,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button Content="Save" HorizontalAlignment="Left" Margin="367,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="462,74,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <TextBox HorizontalAlignment="Left" Margin="462,143,0,470" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <Button x:Name="User_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="961,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="User_New_Button" Content="New" HorizontalAlignment="Left" Margin="226,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="User_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="367,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <ComboBox x:Name="User_ComboBox" HorizontalAlignment="Left" Margin="462,74,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <TextBox x:Name="User_Name" HorizontalAlignment="Left" Margin="462,143,0,470" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="User Name" HorizontalAlignment="Left" Margin="226,135,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="User" HorizontalAlignment="Left" Margin="226,70,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="462,285,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <ComboBox x:Name="User_Type_ComboBox" HorizontalAlignment="Left" Margin="462,285,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="User Type" HorizontalAlignment="Left" Margin="226,281,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Enable Read Actions" HorizontalAlignment="Left" Margin="496,367,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <CheckBox Content="" HorizontalAlignment="Left" Margin="761,383,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
-                    <PasswordBox HorizontalAlignment="Left" Margin="462,194,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <CheckBox x:Name="User_Enable_Read_CheckBox" Content="" HorizontalAlignment="Left" Margin="761,383,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                    <PasswordBox x:Name="User_Password" HorizontalAlignment="Left" Margin="462,194,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Password" HorizontalAlignment="Left" Margin="226,190,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Enable Write Actions" HorizontalAlignment="Left" Margin="496,416,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <CheckBox Content="" HorizontalAlignment="Left" Margin="761,432,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                    <CheckBox x:Name="User_Enable_Write_CheckBox" Content="" HorizontalAlignment="Left" Margin="761,432,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Connection" Margin="-2,-2,-2,0" VerticalAlignment="Bottom">
