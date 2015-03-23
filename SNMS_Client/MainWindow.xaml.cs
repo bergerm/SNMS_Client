@@ -29,7 +29,12 @@ namespace SNMS_Client
         const int TCP_PORT = 56824;
 
         static List<Plugin> pluginList;
+
         static List<Account> accountList;
+
+        static List<Configuration> configurationList;
+        static List<Configuration> configurationWorkingSetList;
+        static List<Sequence> configurationWorkingSetSequences;
 
         static TcpClient client;
         static NetworkStream stream;
@@ -92,12 +97,36 @@ namespace SNMS_Client
 
         bool LoadConfigurationsTab()
         {
-            Accounts_Available_Plugins.Items.Clear();
-            Account_ComboBox.SelectedIndex = -1;
+            Configuration_Available_Plugins.Items.Clear();
+            Configuration_ComboBox.SelectedIndex = -1;
 
             foreach (Plugin plugin in pluginList)
             {
-                Accounts_Available_Plugins.Items.Add(plugin.GetName());
+                Configuration_Available_Plugins.Items.Add(plugin.GetName());
+            }
+            return true;
+        }
+
+        bool LoadTriggerTypesTab()
+        {
+            TriggerTypes_Available_Plugins.Items.Clear();
+            TriggerTypes_ComboBox.SelectedIndex = -1;
+
+            foreach (Plugin plugin in pluginList)
+            {
+                TriggerTypes_Available_Plugins.Items.Add(plugin.GetName());
+            }
+            return true;
+        }
+
+        bool LoadTriggersTab()
+        {
+            Trigger_Available_Plugin.Items.Clear();
+            Trigger_ComboBox.SelectedIndex = -1;
+
+            foreach (Plugin plugin in pluginList)
+            {
+                Trigger_Available_Plugin.Items.Add(plugin.GetName());
             }
             return true;
         }
@@ -145,9 +174,9 @@ namespace SNMS_Client
 
         private void Accounts_Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Account_ComboBox.SelectedIndex = -1;
             Account_ComboBox.Items.Clear();
 
-            Account_ComboBox.SelectedIndex = -1;
             Account_Name.Text = "";
             Account_Description.Text = "";
             Account_User_Name.Text = "";
@@ -210,10 +239,112 @@ namespace SNMS_Client
                         LoadAccountsTab();
                         break;
 
+                    case 2:
+                        LoadConfigurationsTab();
+                        break;
+
+                    case 3:
+                        LoadTriggerTypesTab();
+                        break;
+
+                    case 4:
+                        LoadTriggersTab();
+                        break;
+
                     default:
                         break;
                 }
             }
         }
+
+        private void Configuration_Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Configuration_Account_ComboBox.SelectedIndex = -1;
+ 
+            if (Configuration_Available_Plugins.SelectedIndex != -1)
+            {
+                int dwIndex = Accounts_Available_Plugins.SelectedIndex;
+                Plugin plugin = pluginList[dwIndex];
+                int dwPluginID = plugin.GetID();
+
+                ProtocolMessage accountsMessage = new ProtocolMessage();
+                accountsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_CONFIGURATIONS);
+
+                accountsMessage.AddParameter(dwPluginID);
+
+                ConnectionHandler.SendMessage(stream, accountsMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                accountList = Account.ParseMessage(responseMessage, plugin);
+
+                foreach (Account account in accountList)
+                {
+                    Account_ComboBox.Items.Add(account.GetName());
+                }
+            }
+        }
+
+        private void Configuration_Account_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Configuration_ComboBox.SelectedIndex = -1;
+            Configuration_ComboBox.Items.Clear();
+
+            int index = Configuration_Account_ComboBox.SelectedIndex;
+            if (index != -1)
+            {
+                Account account = accountList[index];
+                configurationWorkingSetList = Configuration.CreateWorkingSet(configurationList, account);
+
+                foreach (Configuration configuration in configurationWorkingSetList)
+                {
+                    Configuration_ComboBox.Items.Add(configuration.GetName());
+                }
+            }
+        }
+
+        private void Configuration_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = Configuration_ComboBox.SelectedIndex;
+            if (index == -1)
+            {
+                Configuration_Name.Text = "";
+                Configuration_Description.Text = "";
+                Configuration_Sequence_ComboBox.SelectedIndex = -1;
+                Configuration_Enabled_Button.Content = "Enabled";
+            }
+            else
+            {
+                Configuration configuration = configurationWorkingSetList[index];
+                Configuration_Name.Text = configuration.GetName();
+                Configuration_Description.Text = configuration.GetDescription();
+                
+                Configuration_Sequence_ComboBox.SelectedIndex = -1;
+                
+                bool isEnabled = configuration.GetEnabled();
+                if (isEnabled)
+                {
+                    Configuration_Enabled_Button.Content = "Enabled";
+                }
+                else
+                {
+                    Configuration_Enabled_Button.Content = "Disabled";
+                }
+            }
+        }
+
+        private void Configuration_Sequence_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = Configuration_Sequence_ComboBox.SelectedIndex;
+            if (index == -1)
+            {
+                Configuration_Sequence_Enabled_CheckBox.IsChecked = false;
+            }
+            else
+            {
+                // set value
+            }
+            
+        }
+        
     }
 }

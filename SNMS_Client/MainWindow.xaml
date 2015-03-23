@@ -49,21 +49,21 @@
             </TabItem>
             <TabItem Header="Configurations" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="Configuration_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <ListBox x:Name="Configuration_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Configuration_Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                     <Button x:Name="Configuration_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <Button x:Name="Configuration_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <Button x:Name="Configuration_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <ComboBox x:Name="Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <ComboBox x:Name="Configuration_Account_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Configuration_Account_ComboBox_SelectionChanged"/>
                     <TextBox x:Name="Configuration_Name" HorizontalAlignment="Left" Margin="650,241,0,372" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="Conf. Name" HorizontalAlignment="Left" Margin="414,233,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Description" HorizontalAlignment="Left" Margin="414,295,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <TextBox x:Name="Configuration_Description" HorizontalAlignment="Left" Margin="650,303,0,243" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="97" FontFamily="Arial"/>
-                    <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox x:Name="Account_ComboBox1" HorizontalAlignment="Left" Margin="650,154,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <Label Content="Account" HorizontalAlignment="Left" Margin="414,150,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox x:Name="Configuration_Sequence_ComboBox" HorizontalAlignment="Left" Margin="650,424,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="Account" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox x:Name="Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,154,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Configuration_Account_ComboBox_SelectionChanged"/>
+                    <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,150,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox x:Name="Configuration_Sequence_ComboBox" HorizontalAlignment="Left" Margin="650,424,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Configuration_Sequence_ComboBox_SelectionChanged"/>
                     <Label Content="Sequence" HorizontalAlignment="Left" Margin="414,420,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Sequence Enabled" HorizontalAlignment="Left" Margin="414,467,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Button x:Name="Configuration_Enabled_Button" Content="Enabled" HorizontalAlignment="Left" Margin="764,544,0,53" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold"/>

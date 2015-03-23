@@ -70,7 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Objects\Account.cs" />
+    <Compile Include="Objects\Configuration.cs" />
     <Compile Include="Objects\Plugin.cs" />
+    <Compile Include="Objects\Sequence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
