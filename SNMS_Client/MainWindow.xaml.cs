@@ -33,7 +33,7 @@ namespace SNMS_Client
         static List<Account> accountList;
 
         static List<Configuration> configurationList;
-        static List<Configuration> configurationWorkingSetList;
+        //static List<Configuration> configurationWorkingSetList;
         static List<Sequence> configurationWorkingSetSequences;
 
         static TcpClient client;
@@ -263,12 +263,12 @@ namespace SNMS_Client
  
             if (Configuration_Available_Plugins.SelectedIndex != -1)
             {
-                int dwIndex = Accounts_Available_Plugins.SelectedIndex;
+                int dwIndex = Configuration_Available_Plugins.SelectedIndex;
                 Plugin plugin = pluginList[dwIndex];
                 int dwPluginID = plugin.GetID();
 
                 ProtocolMessage accountsMessage = new ProtocolMessage();
-                accountsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_CONFIGURATIONS);
+                accountsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_ACCOUNTS);
 
                 accountsMessage.AddParameter(dwPluginID);
 
@@ -279,7 +279,7 @@ namespace SNMS_Client
 
                 foreach (Account account in accountList)
                 {
-                    Account_ComboBox.Items.Add(account.GetName());
+                    Configuration_Account_ComboBox.Items.Add(account.GetName());
                 }
             }
         }
@@ -293,9 +293,19 @@ namespace SNMS_Client
             if (index != -1)
             {
                 Account account = accountList[index];
-                configurationWorkingSetList = Configuration.CreateWorkingSet(configurationList, account);
+                //configurationWorkingSetList = Configuration.CreateWorkingSet(configurationList, account);
 
-                foreach (Configuration configuration in configurationWorkingSetList)
+                ProtocolMessage accountsMessage = new ProtocolMessage();
+                accountsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_CONFIGURATIONS);
+
+                accountsMessage.AddParameter(account.GetID());
+
+                ConnectionHandler.SendMessage(stream, accountsMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                configurationList = Configuration.ParseMessage(responseMessage, account);
+
+                foreach (Configuration configuration in configurationList)
                 {
                     Configuration_ComboBox.Items.Add(configuration.GetName());
                 }
@@ -314,7 +324,7 @@ namespace SNMS_Client
             }
             else
             {
-                Configuration configuration = configurationWorkingSetList[index];
+                Configuration configuration = configurationList[index];
                 Configuration_Name.Text = configuration.GetName();
                 Configuration_Description.Text = configuration.GetDescription();
                 
@@ -329,6 +339,21 @@ namespace SNMS_Client
                 {
                     Configuration_Enabled_Button.Content = "Disabled";
                 }
+
+                ProtocolMessage sequencesMessage = new ProtocolMessage();
+                sequencesMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_SEQUENCES);
+
+                sequencesMessage.AddParameter(configuration.GetID());
+
+                ConnectionHandler.SendMessage(stream, sequencesMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                configurationWorkingSetSequences = Sequence.ParseMessage(responseMessage, configuration);
+
+                foreach (Sequence sequence in configurationWorkingSetSequences)
+                {
+                    Configuration_Sequence_ComboBox.Items.Add(sequence.GetName());
+                }
             }
         }
 
@@ -341,7 +366,8 @@ namespace SNMS_Client
             }
             else
             {
-                // set value
+                Sequence sequence = configurationWorkingSetSequences[index];
+                Configuration_Sequence_Enabled_CheckBox.IsChecked = sequence.GetEnabled();
             }
             
         }

@@ -61,7 +61,7 @@
                     <Label Content="Description" HorizontalAlignment="Left" Margin="414,295,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <TextBox x:Name="Configuration_Description" HorizontalAlignment="Left" Margin="650,303,0,243" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="97" FontFamily="Arial"/>
                     <Label Content="Account" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox x:Name="Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,154,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Configuration_Account_ComboBox_SelectionChanged"/>
+                    <ComboBox x:Name="Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,154,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Configuration_ComboBox_SelectionChanged"/>
                     <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,150,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <ComboBox x:Name="Configuration_Sequence_ComboBox" HorizontalAlignment="Left" Margin="650,424,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Configuration_Sequence_ComboBox_SelectionChanged"/>
                     <Label Content="Sequence" HorizontalAlignment="Left" Margin="414,420,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
