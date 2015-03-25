@@ -126,7 +126,7 @@
                     <Button x:Name="User_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="961,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <Button x:Name="User_New_Button" Content="New" HorizontalAlignment="Left" Margin="226,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <Button x:Name="User_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="367,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <ComboBox x:Name="User_ComboBox" HorizontalAlignment="Left" Margin="462,74,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <ComboBox x:Name="User_ComboBox" HorizontalAlignment="Left" Margin="462,74,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="User_ComboBox_SelectionChanged"/>
                     <TextBox x:Name="User_Name" HorizontalAlignment="Left" Margin="462,143,0,470" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="User Name" HorizontalAlignment="Left" Margin="226,135,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="User" HorizontalAlignment="Left" Margin="226,70,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>

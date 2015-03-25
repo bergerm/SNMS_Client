@@ -40,6 +40,10 @@ namespace SNMS_Client
 
         static List<SNMS_Client.Objects.Trigger> triggersList;
 
+        static List<UserType> userTypesList;
+
+        static List<User> usersList;
+
         static TcpClient client;
         static NetworkStream stream;
 
@@ -132,6 +136,39 @@ namespace SNMS_Client
             {
                 Trigger_Available_Plugin.Items.Add(plugin.GetName());
             }
+            return true;
+        }
+
+        bool LoadUsersTab()
+        {
+            User_ComboBox.Items.Clear();
+            User_ComboBox.SelectedIndex = -1;
+
+            ProtocolMessage userTypesMessage = new ProtocolMessage();
+            userTypesMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_USER_TYPES);
+
+            ConnectionHandler.SendMessage(stream, userTypesMessage);
+            ProtocolMessage responseTypesMessage = ConnectionHandler.GetMessage(stream);
+
+            userTypesList = UserType.ParseMessage(responseTypesMessage);
+
+            ProtocolMessage usersMessage = new ProtocolMessage();
+            usersMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_USERS);
+
+            ConnectionHandler.SendMessage(stream, usersMessage);
+            ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+            usersList = User.ParseMessage(responseMessage, userTypesList);
+
+            foreach (User user in usersList)
+            {
+                User_ComboBox.Items.Add(user.GetName());
+            }
+            if (usersList.Count > 0)
+            {
+                User_ComboBox.SelectedIndex = 0;
+            }
+
             return true;
         }
 
@@ -253,6 +290,10 @@ namespace SNMS_Client
 
                     case 4:
                         LoadTriggersTab();
+                        break;
+
+                    case 5:
+                        LoadUsersTab();
                         break;
 
                     default:
@@ -636,8 +677,47 @@ namespace SNMS_Client
 
                 Trigger_Reaction_ComboBox.SelectedIndex = reactionIndex;
             }
-        }        
+        }
 
+        private void User_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int dwIndex = User_ComboBox.SelectedIndex;
+            if (dwIndex == -1)
+            {
+                User_Name.Text = "";
+                User_Password.Password = "";
+                User_Type_ComboBox.SelectedIndex = -1;
+                User_Type_ComboBox.Items.Clear();
+                User_Enable_Read_CheckBox.IsChecked = false;
+                User_Enable_Write_CheckBox.IsChecked = false;
+            }
+            else
+            {
+                User user = usersList[dwIndex];
+
+                User_Name.Text = user.GetName();
+                User_Password.Password = user.GetPassword();
+                User_Enable_Read_CheckBox.IsChecked = user.GetEnableRead();
+                User_Enable_Write_CheckBox.IsChecked = user.GetEnableWrite();
+
+                User_Type_ComboBox.SelectedIndex = -1;
+                User_Type_ComboBox.Items.Clear();
+
+                int currIndex = 0;
+                int userTypeIndex = 0;
+                foreach (UserType type in userTypesList)
+                {
+                    User_Type_ComboBox.Items.Add(type.GetName());
+                    if (type.GetID() == user.GetUserType().GetID())
+                    {
+                        userTypeIndex = currIndex;
+                    }
+                    currIndex++;
+                }
+                User_Type_ComboBox.SelectedIndex = userTypeIndex;
+
+            }
+        }
 
     }
 }

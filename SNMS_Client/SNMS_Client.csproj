@@ -75,6 +75,8 @@
     <Compile Include="Objects\Sequence.cs" />
     <Compile Include="Objects\Trigger.cs" />
     <Compile Include="Objects\TriggerType.cs" />
+    <Compile Include="Objects\User.cs" />
+    <Compile Include="Objects\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
