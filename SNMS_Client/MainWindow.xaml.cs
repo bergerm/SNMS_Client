@@ -33,8 +33,12 @@ namespace SNMS_Client
         static List<Account> accountList;
 
         static List<Configuration> configurationList;
-        //static List<Configuration> configurationWorkingSetList;
-        static List<Sequence> configurationWorkingSetSequences;
+
+        static List<Sequence> sequenceList;
+
+        static List<TriggerType> triggerTypesList;
+
+        static List<SNMS_Client.Objects.Trigger> triggersList;
 
         static TcpClient client;
         static NetworkStream stream;
@@ -348,9 +352,9 @@ namespace SNMS_Client
                 ConnectionHandler.SendMessage(stream, sequencesMessage);
                 ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
 
-                configurationWorkingSetSequences = Sequence.ParseMessage(responseMessage, configuration);
+                sequenceList = Sequence.ParseMessage(responseMessage, configuration);
 
-                foreach (Sequence sequence in configurationWorkingSetSequences)
+                foreach (Sequence sequence in sequenceList)
                 {
                     Configuration_Sequence_ComboBox.Items.Add(sequence.GetName());
                 }
@@ -366,11 +370,274 @@ namespace SNMS_Client
             }
             else
             {
-                Sequence sequence = configurationWorkingSetSequences[index];
+                Sequence sequence = sequenceList[index];
                 Configuration_Sequence_Enabled_CheckBox.IsChecked = sequence.GetEnabled();
             }
             
         }
-        
+
+        private void TriggerTypes_Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TriggersTypes_Account_ComboBox.SelectedIndex = -1;
+            TriggersTypes_Account_ComboBox.Items.Clear();
+
+            if (TriggerTypes_Available_Plugins.SelectedIndex != -1)
+            {
+                int dwIndex = TriggerTypes_Available_Plugins.SelectedIndex;
+                Plugin plugin = pluginList[dwIndex];
+                int dwPluginID = plugin.GetID();
+
+                ProtocolMessage accountsMessage = new ProtocolMessage();
+                accountsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_ACCOUNTS);
+
+                accountsMessage.AddParameter(dwPluginID);
+
+                ConnectionHandler.SendMessage(stream, accountsMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                accountList = Account.ParseMessage(responseMessage, plugin);
+
+                foreach (Account account in accountList)
+                {
+                    TriggersTypes_Account_ComboBox.Items.Add(account.GetName());
+                }
+            }
+        }
+
+        private void TriggersTypes_Account_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TriggersTypes_Configuration_ComboBox.SelectedIndex = -1;
+            TriggersTypes_Configuration_ComboBox.Items.Clear();
+
+            int index = TriggersTypes_Account_ComboBox.SelectedIndex;
+            if (index != -1)
+            {
+                Account account = accountList[index];
+
+                ProtocolMessage accountsMessage = new ProtocolMessage();
+                accountsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_CONFIGURATIONS);
+
+                accountsMessage.AddParameter(account.GetID());
+
+                ConnectionHandler.SendMessage(stream, accountsMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                configurationList = Configuration.ParseMessage(responseMessage, account);
+
+                foreach (Configuration configuration in configurationList)
+                {
+                    TriggersTypes_Configuration_ComboBox.Items.Add(configuration.GetName());
+                }
+            }
+        }
+
+        private void TriggersTypes_Configuration_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TriggerTypes_ComboBox.SelectedIndex = -1;
+            TriggerTypes_ComboBox.Items.Clear();
+
+            int index = TriggersTypes_Configuration_ComboBox.SelectedIndex;
+            if (index != -1)
+            {
+                Configuration configuration = configurationList[index];
+
+                ProtocolMessage configurationMessage = new ProtocolMessage();
+                configurationMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_TRIGGER_TYPES);
+
+                configurationMessage.AddParameter(configuration.GetID());
+
+                ConnectionHandler.SendMessage(stream, configurationMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                triggerTypesList = TriggerType.ParseMessage(responseMessage, configuration);
+
+                foreach (TriggerType type in triggerTypesList)
+                {
+                    TriggerTypes_ComboBox.Items.Add(type.GetName());
+                }
+            }
+        }
+
+        private void TriggerTypes_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index =TriggerTypes_ComboBox.SelectedIndex;
+            if (index == -1)
+            {
+                TriggerTypes_Name.Text = "";
+                TriggerTypes_Description.Text = "";
+            }
+            else
+            {
+                TriggerType type = triggerTypesList[index];
+                TriggerTypes_Name.Text = type.GetName();
+                TriggerTypes_Description.Text = type.GetDescription();
+            }
+        }
+
+        private void Trigger_Available_Plugin_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trigger_Account_ComboBox.SelectedIndex = -1;
+            Trigger_Account_ComboBox.Items.Clear();
+
+            if (Trigger_Available_Plugin.SelectedIndex != -1)
+            {
+                int dwIndex = Trigger_Available_Plugin.SelectedIndex;
+                Plugin plugin = pluginList[dwIndex];
+                int dwPluginID = plugin.GetID();
+
+                ProtocolMessage accountsMessage = new ProtocolMessage();
+                accountsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_ACCOUNTS);
+
+                accountsMessage.AddParameter(dwPluginID);
+
+                ConnectionHandler.SendMessage(stream, accountsMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                accountList = Account.ParseMessage(responseMessage, plugin);
+
+                foreach (Account account in accountList)
+                {
+                    Trigger_Account_ComboBox.Items.Add(account.GetName());
+                }
+            }
+        }
+
+        private void Trigger_Account_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trigger_Configuration_ComboBox.SelectedIndex = -1;
+            Trigger_Configuration_ComboBox.Items.Clear();
+
+            int index = Trigger_Account_ComboBox.SelectedIndex;
+            if (index != -1)
+            {
+                Account account = accountList[index];
+
+                ProtocolMessage configurationsMessage = new ProtocolMessage();
+                configurationsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_CONFIGURATIONS);
+
+                configurationsMessage.AddParameter(account.GetID());
+
+                ConnectionHandler.SendMessage(stream, configurationsMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                configurationList = Configuration.ParseMessage(responseMessage, account);
+
+                foreach (Configuration configuration in configurationList)
+                {
+                    Trigger_Configuration_ComboBox.Items.Add(configuration.GetName());
+                }
+            }
+
+        }
+
+        private void Trigger_Configuration_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trigger_TriggerType_ComboBox.SelectedIndex = -1;
+            Trigger_TriggerType_ComboBox.Items.Clear();
+
+            int index = Trigger_Configuration_ComboBox.SelectedIndex;
+            if (index != -1)
+            {
+                Configuration configuration = configurationList[index];
+
+                ProtocolMessage triggerTypesMessage = new ProtocolMessage();
+                triggerTypesMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_TRIGGER_TYPES);
+
+                triggerTypesMessage.AddParameter(configuration.GetID());
+
+                ConnectionHandler.SendMessage(stream, triggerTypesMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                triggerTypesList = TriggerType.ParseMessage(responseMessage, configuration);
+
+                foreach (TriggerType type in triggerTypesList)
+                {
+                    Trigger_TriggerType_ComboBox.Items.Add(type.GetName());
+                }
+            }
+        }
+
+        private void Trigger_TriggerType_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trigger_ComboBox.SelectedIndex = -1;
+            Trigger_ComboBox.Items.Clear();
+
+            int index = Trigger_TriggerType_ComboBox.SelectedIndex;
+            if (index != -1)
+            {
+                TriggerType triggerType = triggerTypesList[index];
+
+                ProtocolMessage triggersMessage = new ProtocolMessage();
+                triggersMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_TRIGGERS);
+
+                int configurationIndex = Trigger_Configuration_ComboBox.SelectedIndex;
+                Configuration configuration = configurationList[configurationIndex];
+                triggersMessage.AddParameter(configuration.GetID());
+                triggersMessage.AddParameter(triggerType.GetID());
+
+                ConnectionHandler.SendMessage(stream, triggersMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                ProtocolMessage sequencesMessage = new ProtocolMessage();
+                triggersMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_SEQUENCES);
+                sequencesMessage.AddParameter(configuration.GetID());
+                ConnectionHandler.SendMessage(stream, triggersMessage);
+                ProtocolMessage responseSequencesMessage = ConnectionHandler.GetMessage(stream);
+
+                sequenceList = Sequence.ParseMessage(responseSequencesMessage, configuration);
+
+                triggersList = SNMS_Client.Objects.Trigger.ParseMessage(responseMessage, configuration, triggerType, sequenceList);
+
+                foreach (SNMS_Client.Objects.Trigger trigger in triggersList)
+                {
+                    Trigger_ComboBox.Items.Add(trigger.GetName());
+                }
+            }
+        }
+
+        private void Trigger_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = Trigger_ComboBox.SelectedIndex;
+            if (index == -1)
+            {
+                Trigger_Name.Text = "";
+                Trigger_Description.Text = "";
+                Trigger_Value.Text = "";
+                Trigger_Reaction_ComboBox.SelectedIndex = -1;
+                Trigger_Reaction_ComboBox.Items.Clear();
+                Trigger_Reaction_Value.Text = "";
+                Trigger_Enabled_CheckBox.IsChecked = false;
+            }
+            else
+            {
+                SNMS_Client.Objects.Trigger trigger = triggersList[index];
+                Trigger_Name.Text = trigger.GetName();
+                Trigger_Description.Text = trigger.GetDescription();
+                Trigger_Value.Text = trigger.GetValue();
+                Trigger_Reaction_Value.Text = trigger.GetReactionValue();
+                Trigger_Enabled_CheckBox.IsChecked = trigger.GetEnabled();
+
+                Trigger_Reaction_ComboBox.SelectedIndex = -1;
+                Trigger_Reaction_ComboBox.Items.Clear();
+
+                int reactionIndex = 0;
+                int loopIndex = 0;
+                foreach (Sequence seq in sequenceList)
+                {
+                    if (seq.GetName() == trigger.GetReaction().GetName())
+                    {
+                        reactionIndex = loopIndex;
+                    }
+
+                    Trigger_Reaction_ComboBox.Items.Add(seq.GetName());
+
+                    loopIndex++;
+                }
+
+                Trigger_Reaction_ComboBox.SelectedIndex = reactionIndex;
+            }
+        }        
+
+
     }
 }

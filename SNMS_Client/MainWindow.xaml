@@ -72,48 +72,52 @@
             </TabItem>
             <TabItem Header="Trigger Types" Margin="-2,0" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="TriggerTypes_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <ListBox x:Name="TriggerTypes_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="TriggerTypes_Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                     <Button x:Name="TriggerTypes_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <Button x:Name="TriggerTypes_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <Button x:Name="TriggerTypes_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <ComboBox x:Name="TriggersTypes_Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <TextBox x:Name="TriggerTypes_Name" HorizontalAlignment="Left" Margin="650,205,0,408" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
-                    <Label Content="Trigger Type Name" HorizontalAlignment="Left" Margin="414,197,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <Label Content="Description" HorizontalAlignment="Left" Margin="414,259,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <TextBox x:Name="TriggerTypes_Description" HorizontalAlignment="Left" Margin="650,267,0,167" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="209" FontFamily="Arial"/>
-                    <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox x:Name="TriggerTypes_ComboBox" HorizontalAlignment="Left" Margin="650,150,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <Label Content="Trigger Type" HorizontalAlignment="Left" Margin="414,146,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox x:Name="TriggersTypes_Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,152,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="TriggersTypes_Configuration_ComboBox_SelectionChanged"/>
+                    <TextBox x:Name="TriggerTypes_Name" HorizontalAlignment="Left" Margin="650,262,0,351" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <Label Content="Trigger Type Name" HorizontalAlignment="Left" Margin="414,254,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Description" HorizontalAlignment="Left" Margin="414,316,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox x:Name="TriggerTypes_Description" HorizontalAlignment="Left" Margin="650,324,0,173" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="146" FontFamily="Arial"/>
+                    <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,148,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox x:Name="TriggerTypes_ComboBox" HorizontalAlignment="Left" Margin="650,208,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="TriggerTypes_ComboBox_SelectionChanged"/>
+                    <Label Content="Trigger Type" HorizontalAlignment="Left" Margin="414,204,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox x:Name="TriggersTypes_Account_ComboBox" HorizontalAlignment="Left" Margin="650,90,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="TriggersTypes_Account_ComboBox_SelectionChanged"/>
+                    <Label Content="Account" HorizontalAlignment="Left" Margin="414,86,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Triggers" Margin="-2,-2,-2,0" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="Trigger_Available_Plugin" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350"/>
+                    <ListBox x:Name="Trigger_Available_Plugin" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Trigger_Available_Plugin_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                     <Button x:Name="Trigger_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <Button x:Name="Trigger_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <Button x:Name="Trigger_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <ComboBox x:Name="Trigger_Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <TextBox x:Name="Trigger_Name" HorizontalAlignment="Left" Margin="650,263,0,350" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
-                    <Label Content="Trigger Name" HorizontalAlignment="Left" Margin="414,255,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <Label Content="Description" HorizontalAlignment="Left" Margin="414,302,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <TextBox x:Name="Trigger_Description" HorizontalAlignment="Left" Margin="650,310,0,281" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="52" FontFamily="Arial"/>
-                    <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,90,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <TextBox x:Name="Trigger_Value" HorizontalAlignment="Left" Margin="650,378,0,235" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
-                    <Label Content="Trigger Value" HorizontalAlignment="Left" Margin="414,370,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <PasswordBox x:Name="Trigger_Reaction_Value" HorizontalAlignment="Left" Margin="650,467,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <Label Content="Reaction Value" HorizontalAlignment="Left" Margin="415,459,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox x:Name="Trigger_TriggerType_ComboBox" HorizontalAlignment="Left" Margin="650,150,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <Label Content="Trigger Type" HorizontalAlignment="Left" Margin="414,146,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <ComboBox x:Name="Trigger_Reaction_ComboBox" HorizontalAlignment="Left" Margin="650,419,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <Label Content="Reaction" HorizontalAlignment="Left" Margin="414,415,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <Label Content="Trigger Enabled" HorizontalAlignment="Left" Margin="742,516,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <CheckBox x:Name="Trigger_Enabled_CheckBox" Content="" HorizontalAlignment="Left" Margin="949,532,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
-                    <ComboBox x:Name="Trigger_ComboBox" HorizontalAlignment="Left" Margin="650,204,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
-                    <Label Content="Trigger" HorizontalAlignment="Left" Margin="414,200,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox x:Name="Trigger_Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,124,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Trigger_Configuration_ComboBox_SelectionChanged"/>
+                    <TextBox x:Name="Trigger_Name" HorizontalAlignment="Left" Margin="650,293,0,320" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <Label Content="Trigger Name" HorizontalAlignment="Left" Margin="414,285,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Description" HorizontalAlignment="Left" Margin="414,332,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox x:Name="Trigger_Description" HorizontalAlignment="Left" Margin="650,340,0,251" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="52" FontFamily="Arial"/>
+                    <Label Content="Configuration" HorizontalAlignment="Left" Margin="414,120,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox x:Name="Trigger_Value" HorizontalAlignment="Left" Margin="650,408,0,205" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
+                    <Label Content="Trigger Value" HorizontalAlignment="Left" Margin="414,400,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <TextBox x:Name="Trigger_Reaction_Value" HorizontalAlignment="Left" Margin="650,497,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="Reaction Value" HorizontalAlignment="Left" Margin="415,489,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox x:Name="Trigger_TriggerType_ComboBox" HorizontalAlignment="Left" Margin="650,180,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Trigger_TriggerType_ComboBox_SelectionChanged"/>
+                    <Label Content="Trigger Type" HorizontalAlignment="Left" Margin="414,176,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox x:Name="Trigger_Reaction_ComboBox" HorizontalAlignment="Left" Margin="650,449,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
+                    <Label Content="Reaction" HorizontalAlignment="Left" Margin="414,445,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <Label Content="Trigger Enabled" HorizontalAlignment="Left" Margin="742,546,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <CheckBox x:Name="Trigger_Enabled_CheckBox" Content="" HorizontalAlignment="Left" Margin="949,562,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                    <ComboBox x:Name="Trigger_ComboBox" HorizontalAlignment="Left" Margin="650,234,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Trigger_ComboBox_SelectionChanged"/>
+                    <Label Content="Trigger" HorizontalAlignment="Left" Margin="414,230,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+                    <ComboBox x:Name="Trigger_Account_ComboBox" HorizontalAlignment="Left" Margin="650,77,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Trigger_Account_ComboBox_SelectionChanged"/>
+                    <Label Content="Account" HorizontalAlignment="Left" Margin="414,73,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Users" VerticalAlignment="Bottom">

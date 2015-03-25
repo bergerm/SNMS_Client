@@ -73,6 +73,8 @@
     <Compile Include="Objects\Configuration.cs" />
     <Compile Include="Objects\Plugin.cs" />
     <Compile Include="Objects\Sequence.cs" />
+    <Compile Include="Objects\Trigger.cs" />
+    <Compile Include="Objects\TriggerType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

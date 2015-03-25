@@ -60,20 +60,5 @@ namespace SNMS_Client.Objects
 
             return configurationList;
         }
-
-        public static List<Configuration> CreateWorkingSet(List<Configuration> completeList, Account account)
-        {
-            List<Configuration> workingSet = new List<Configuration>();
-
-            foreach (Configuration configuration in completeList)
-            {
-                if (configuration.GetAccount().GetID() == account.GetID())
-                {
-                    workingSet.Add(configuration);
-                }
-            }
-
-            return workingSet;
-        }
     }
 }
