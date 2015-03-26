@@ -719,5 +719,61 @@ namespace SNMS_Client
             }
         }
 
+        private void Account_New_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Accounts_Available_Plugins.SelectedIndex < 0)
+            {
+                return;
+            }
+            
+            ProtocolMessage newAccountMessage = new ProtocolMessage();
+            newAccountMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_NEW_ACCOUNT);
+
+            Plugin plugin = pluginList[Accounts_Available_Plugins.SelectedIndex];
+            newAccountMessage.AddParameter(plugin.GetID());
+
+            ConnectionHandler.SendMessage(stream, newAccountMessage);
+            ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);  
+
+            List<Account> list = Account.ParseMessage(responseMessage, plugin);
+            Account account = list[0];
+
+            accountList.Add(account);
+            Account_ComboBox.Items.Add(account.GetName());
+            Account_ComboBox.SelectedIndex = Account_ComboBox.Items.Count - 1;
+
+            Account_Name.Text = account.GetName();
+            Account_Description.Text = account.GetDescription();
+            Account_User_Name.Text = account.GetUserName();
+            Account_Password.Password = account.GetPassword();
+        }
+
+        private void Account_Save_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Account_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            Account account = accountList[index];
+            account.SetName(Account_Name.Text);
+            account.SetDescription(Account_Description.Text);
+            account.SetUserName(Account_User_Name.Text);
+            account.SetPassword(Account_Password.Password);
+
+            ProtocolMessage updateAccountMessage = new ProtocolMessage();
+            updateAccountMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_UPDATE_ACCOUNT);
+
+            updateAccountMessage.AddParameter(account.GetID());
+            updateAccountMessage.AddParameter(account.GetPlugin().GetID());
+            updateAccountMessage.AddParameter(account.GetName());
+            updateAccountMessage.AddParameter(account.GetDescription());
+            updateAccountMessage.AddParameter(account.GetUserName());
+            updateAccountMessage.AddParameter(account.GetPassword());
+
+            ConnectionHandler.SendMessage(stream, updateAccountMessage);
+        }
+
     }
 }

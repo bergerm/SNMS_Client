@@ -33,8 +33,8 @@
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                     <Button x:Name="Account_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button x:Name="Account_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button x:Name="Account_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Account_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Account_New_Button_Click"/>
+                    <Button x:Name="Account_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Account_Save_Button_Click"/>
                     <ComboBox x:Name="Account_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Account_ComboBox_SelectionChanged"/>
                     <TextBox x:Name="Account_Name" HorizontalAlignment="Left" Margin="650,166,0,447" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="Account Name" HorizontalAlignment="Left" Margin="414,158,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
