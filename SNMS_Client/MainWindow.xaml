@@ -22,7 +22,7 @@
                     <Label Content="Plugin Name" HorizontalAlignment="Left" Margin="414,94,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Plugin Description" HorizontalAlignment="Left" Margin="414,156,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <TextBox x:Name="Plugin_Description" HorizontalAlignment="Left" Margin="650,164,0,181" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="298" FontFamily="Arial"/>
-                    <Button x:Name="Plugin_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Plugin_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Plugin_Delete_Button_Click"/>
                     <Button x:Name="Plugin_Enable_Button" Content="Enabled" HorizontalAlignment="Left" Margin="742,502,0,95" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold" Click="Plugin_Enable_Button_Click"/>
                     <Button x:Name="Plugin_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="463,502,0,95" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                 </Grid>
@@ -32,7 +32,7 @@
                     <ListBox x:Name="Accounts_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Accounts_Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button x:Name="Account_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Account_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Account_Delete_Button_Click"/>
                     <Button x:Name="Account_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Account_New_Button_Click"/>
                     <Button x:Name="Account_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Account_Save_Button_Click"/>
                     <ComboBox x:Name="Account_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Account_ComboBox_SelectionChanged"/>
@@ -52,7 +52,7 @@
                     <ListBox x:Name="Configuration_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Configuration_Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button x:Name="Configuration_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Configuration_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Configuration_Delete_Button_Click"/>
                     <Button x:Name="Configuration_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Configuration_New_Button_Click"/>
                     <Button x:Name="Configuration_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Configuration_Save_Button_Click"/>
                     <ComboBox x:Name="Configuration_Account_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Configuration_Account_ComboBox_SelectionChanged"/>
@@ -75,7 +75,7 @@
                     <ListBox x:Name="TriggerTypes_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="TriggerTypes_Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button x:Name="TriggerTypes_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="TriggerTypes_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="TriggerTypes_Delete_Button_Click"/>
                     <Button x:Name="TriggerTypes_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="TriggerTypes_New_Button_Click"/>
                     <Button x:Name="TriggerTypes_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="TriggerTypes_Save_Button_Click"/>
                     <ComboBox x:Name="TriggersTypes_Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,152,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="TriggersTypes_Configuration_ComboBox_SelectionChanged"/>
@@ -95,7 +95,7 @@
                     <ListBox x:Name="Trigger_Available_Plugin" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Trigger_Available_Plugin_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button x:Name="Trigger_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Trigger_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Trigger_Delete_Button_Click"/>
                     <Button x:Name="Trigger_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Trigger_New_Button_Click"/>
                     <Button x:Name="Trigger_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Trigger_Save_Button_Click"/>
                     <ComboBox x:Name="Trigger_Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,124,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Trigger_Configuration_ComboBox_SelectionChanged"/>
@@ -123,7 +123,7 @@
             <TabItem Header="Users" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="200,36,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                    <Button x:Name="User_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="961,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="User_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="961,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="User_Delete_Button_Click"/>
                     <Button x:Name="User_New_Button" Content="New" HorizontalAlignment="Left" Margin="226,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="User_New_Button_Click"/>
                     <Button x:Name="User_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="367,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="User_Save_Button_Click"/>
                     <ComboBox x:Name="User_ComboBox" HorizontalAlignment="Left" Margin="462,74,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="User_ComboBox_SelectionChanged"/>

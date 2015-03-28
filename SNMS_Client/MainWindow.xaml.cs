@@ -1024,5 +1024,119 @@ namespace SNMS_Client
 
             ConnectionHandler.SendMessage(stream, updateUserMessage);
         }
+
+        private void User_Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = User_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            User user = usersList[index];
+
+            ProtocolMessage deleteUserMessage = new ProtocolMessage();
+            deleteUserMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_USER);
+            deleteUserMessage.AddParameter(user.GetID());
+
+            ConnectionHandler.SendMessage(stream, deleteUserMessage);
+
+            User_ComboBox.SelectedIndex = index - 1;
+        }
+
+        private void Trigger_Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Trigger_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            SNMS_Client.Objects.Trigger trigger = triggersList[index];
+
+            ProtocolMessage deleteTriggerMessage = new ProtocolMessage();
+            deleteTriggerMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_TRIGGER);
+            deleteTriggerMessage.AddParameter(trigger.GetID());
+
+            ConnectionHandler.SendMessage(stream, deleteTriggerMessage);
+
+            Trigger_ComboBox.SelectedIndex = index - 1;
+        }
+
+        private void TriggerTypes_Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = TriggerTypes_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            TriggerType type = triggerTypesList[index];
+
+            ProtocolMessage deleteTriggerTypeMessage = new ProtocolMessage();
+            deleteTriggerTypeMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_TRIGGER_TYPE);
+            deleteTriggerTypeMessage.AddParameter(type.GetID());
+
+            ConnectionHandler.SendMessage(stream, deleteTriggerTypeMessage);
+
+            TriggerTypes_ComboBox.SelectedIndex = index - 1;
+        }
+
+        private void Configuration_Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Configuration_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            Configuration configuration = configurationList[index];
+
+            ProtocolMessage deleteConfigurationMessage = new ProtocolMessage();
+            deleteConfigurationMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_CONFIGURATION);
+            deleteConfigurationMessage.AddParameter(configuration.GetID());
+
+            ConnectionHandler.SendMessage(stream, deleteConfigurationMessage);
+
+            Configuration_ComboBox.SelectedIndex = index - 1;
+        }
+
+        private void Account_Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Account_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            Account account = accountList[index];
+
+            ProtocolMessage deleteAccountMessage = new ProtocolMessage();
+            deleteAccountMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_ACCOUNT);
+            deleteAccountMessage.AddParameter(account.GetID());
+
+            ConnectionHandler.SendMessage(stream, deleteAccountMessage);
+
+            Account_ComboBox.SelectedIndex = index - 1;
+        }
+
+        private void Plugin_Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Plugins_Available_Plugins.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            Plugin plugin = pluginList[index];
+
+            ProtocolMessage deletePluginMessage = new ProtocolMessage();
+            deletePluginMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_PLUGIN);
+            deletePluginMessage.AddParameter(plugin.GetID());
+
+            ConnectionHandler.SendMessage(stream, deletePluginMessage);
+
+            Plugins_Available_Plugins.SelectedIndex = index - 1;
+        }
     }
 }
