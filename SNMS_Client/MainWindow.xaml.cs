@@ -106,7 +106,8 @@ namespace SNMS_Client
         bool LoadConfigurationsTab()
         {
             Configuration_Available_Plugins.Items.Clear();
-            Configuration_ComboBox.SelectedIndex = -1;
+            Configuration_Account_ComboBox.Items.Clear();
+            Configuration_Account_ComboBox.SelectedIndex = -1;
 
             foreach (Plugin plugin in pluginList)
             {
@@ -374,6 +375,7 @@ namespace SNMS_Client
                 Configuration_Description.Text = configuration.GetDescription();
                 
                 Configuration_Sequence_ComboBox.SelectedIndex = -1;
+                Configuration_Sequence_ComboBox.Items.Clear();
                 
                 bool isEnabled = configuration.GetEnabled();
                 if (isEnabled)
@@ -741,11 +743,6 @@ namespace SNMS_Client
             accountList.Add(account);
             Account_ComboBox.Items.Add(account.GetName());
             Account_ComboBox.SelectedIndex = Account_ComboBox.Items.Count - 1;
-
-            Account_Name.Text = account.GetName();
-            Account_Description.Text = account.GetDescription();
-            Account_User_Name.Text = account.GetUserName();
-            Account_Password.Password = account.GetPassword();
         }
 
         private void Account_Save_Button_Click(object sender, RoutedEventArgs e)
@@ -773,6 +770,95 @@ namespace SNMS_Client
             updateAccountMessage.AddParameter(account.GetPassword());
 
             ConnectionHandler.SendMessage(stream, updateAccountMessage);
+        }
+
+        private void Configuration_New_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Configuration_Available_Plugins.SelectedIndex < 0 || Configuration_Account_ComboBox.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            ProtocolMessage newConfigurationMessage = new ProtocolMessage();
+            newConfigurationMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_NEW_CONFIGURATION);
+
+            Account account = accountList[Configuration_Account_ComboBox.SelectedIndex];
+            newConfigurationMessage.AddParameter(account.GetID());
+
+            ConnectionHandler.SendMessage(stream, newConfigurationMessage);
+            ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+            List<Configuration> list = Configuration.ParseMessage(responseMessage, account);
+            Configuration configuration = list[0];
+
+            configurationList.Add(configuration);
+            Configuration_ComboBox.Items.Add(configuration.GetName());
+            Configuration_ComboBox.SelectedIndex = Configuration_ComboBox.Items.Count - 1;
+
+        }
+
+        private void Configuration_Enabled_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Configuration_Enabled_Button.Content = (Configuration_Enabled_Button.Content == "Enabled") ? "Disabled" : "Enabled";
+        }
+
+        private void Configuration_Save_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Configuration_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            bool bEnabled = (Configuration_Enabled_Button.Content == "Enabled") ? true : false;
+            Configuration configuration = configurationList[index];
+            configuration.SetName(Configuration_Name.Text);
+            configuration.SetDescription(Configuration_Description.Text);
+            configuration.SetEnabled(bEnabled);
+
+            ProtocolMessage updateConfigurationMessage = new ProtocolMessage();
+            updateConfigurationMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_UPDATE_CONFIGURATION);
+
+            updateConfigurationMessage.AddParameter(configuration.GetID());
+            updateConfigurationMessage.AddParameter(configuration.GetAccount().GetID());
+            updateConfigurationMessage.AddParameter(configuration.GetName());
+            updateConfigurationMessage.AddParameter(configuration.GetDescription());
+            updateConfigurationMessage.AddParameter(configuration.GetEnabled());
+
+            ConnectionHandler.SendMessage(stream, updateConfigurationMessage);
+        }
+
+        private void Configuration_Sequence_Enabled_CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            int index = Configuration_Sequence_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+            
+            Sequence sequence = sequenceList[index];
+            bool? checkStatus = Configuration_Sequence_Enabled_CheckBox.IsChecked;
+            bool bEnabled = false;
+            if (checkStatus != null)
+            {
+                bEnabled = (bool)checkStatus;
+            }
+            
+            sequence.SetEnabled(bEnabled);
+
+            ProtocolMessage updateSequenceMessage = new ProtocolMessage();
+            updateSequenceMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_UPDATE_SEQUENCE);
+
+            updateSequenceMessage.AddParameter(sequence.GetID());
+            updateSequenceMessage.AddParameter(sequence.GetConfiguration().GetID());
+            updateSequenceMessage.AddParameter(sequence.GetEnabled());
+
+            ConnectionHandler.SendMessage(stream, updateSequenceMessage);
+        }
+
+        private void TriggerTypes_New_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

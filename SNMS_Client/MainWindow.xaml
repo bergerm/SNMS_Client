@@ -53,8 +53,8 @@
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                     <Button x:Name="Configuration_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button x:Name="Configuration_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button x:Name="Configuration_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="Configuration_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Configuration_New_Button_Click"/>
+                    <Button x:Name="Configuration_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="Configuration_Save_Button_Click"/>
                     <ComboBox x:Name="Configuration_Account_ComboBox" HorizontalAlignment="Left" Margin="650,94,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Configuration_Account_ComboBox_SelectionChanged"/>
                     <TextBox x:Name="Configuration_Name" HorizontalAlignment="Left" Margin="650,241,0,372" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
                     <Label Content="Conf. Name" HorizontalAlignment="Left" Margin="414,233,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
@@ -66,8 +66,8 @@
                     <ComboBox x:Name="Configuration_Sequence_ComboBox" HorizontalAlignment="Left" Margin="650,424,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="Configuration_Sequence_ComboBox_SelectionChanged"/>
                     <Label Content="Sequence" HorizontalAlignment="Left" Margin="414,420,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <Label Content="Sequence Enabled" HorizontalAlignment="Left" Margin="414,467,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <Button x:Name="Configuration_Enabled_Button" Content="Enabled" HorizontalAlignment="Left" Margin="764,544,0,53" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <CheckBox x:Name="Configuration_Sequence_Enabled_CheckBox" Content="" HorizontalAlignment="Left" Margin="653,482,0,0" VerticalAlignment="Top" Height="16" Width="17"/>
+                    <Button x:Name="Configuration_Enabled_Button" Content="Enabled" HorizontalAlignment="Left" Margin="764,544,0,53" VerticalAlignment="Center" Width="176" FontSize="24" Height="46" FontWeight="Bold" Click="Configuration_Enabled_Button_Click"/>
+                    <CheckBox x:Name="Configuration_Sequence_Enabled_CheckBox" Content="" HorizontalAlignment="Left" Margin="653,482,0,0" VerticalAlignment="Top" Height="16" Width="17" Checked="Configuration_Sequence_Enabled_CheckBox_Checked" Unchecked="Configuration_Sequence_Enabled_CheckBox_Checked"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Trigger Types" Margin="-2,0" VerticalAlignment="Bottom">
@@ -76,7 +76,7 @@
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="383,58,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                     <Button x:Name="TriggerTypes_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="1149,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
-                    <Button x:Name="TriggerTypes_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
+                    <Button x:Name="TriggerTypes_New_Button" Content="New" HorizontalAlignment="Left" Margin="414,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="TriggerTypes_New_Button_Click"/>
                     <Button x:Name="TriggerTypes_Save_Button" Content="Save" HorizontalAlignment="Left" Margin="555,544,0,53" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold"/>
                     <ComboBox x:Name="TriggersTypes_Configuration_ComboBox" HorizontalAlignment="Left" Margin="650,152,0,0" VerticalAlignment="Top" Width="593" FontSize="24" SelectionChanged="TriggersTypes_Configuration_ComboBox_SelectionChanged"/>
                     <TextBox x:Name="TriggerTypes_Name" HorizontalAlignment="Left" Margin="650,262,0,351" TextWrapping="Wrap" VerticalAlignment="Center" Width="593" FontSize="24" Height="30" FontFamily="Arial"/>
