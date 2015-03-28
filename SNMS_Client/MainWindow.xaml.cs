@@ -214,6 +214,11 @@ namespace SNMS_Client
             }
         }
 
+        private void Plugin_Enable_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Plugin_Enable_Button.Content = (Configuration_Enabled_Button.Content == "Enabled") ? "Disabled" : "Enabled";
+        }
+
         private void Accounts_Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Account_ComboBox.SelectedIndex = -1;
@@ -663,11 +668,12 @@ namespace SNMS_Client
                 Trigger_Reaction_ComboBox.SelectedIndex = -1;
                 Trigger_Reaction_ComboBox.Items.Clear();
 
-                int reactionIndex = 0;
+                int reactionIndex = -1;
                 int loopIndex = 0;
+                
                 foreach (Sequence seq in sequenceList)
                 {
-                    if (seq.GetName() == trigger.GetReaction().GetName())
+                    if (trigger.GetReaction() != null && seq.GetName() == trigger.GetReaction().GetName())
                     {
                         reactionIndex = loopIndex;
                     }
@@ -858,8 +864,165 @@ namespace SNMS_Client
 
         private void TriggerTypes_New_Button_Click(object sender, RoutedEventArgs e)
         {
+            if (TriggerTypes_Available_Plugins.SelectedIndex < 0 || TriggersTypes_Account_ComboBox.SelectedIndex < 0 || TriggersTypes_Configuration_ComboBox.SelectedIndex < 0)
+            {
+                return;
+            }
 
+            ProtocolMessage newTriggerTypeMessage = new ProtocolMessage();
+            newTriggerTypeMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_NEW_TRIGGER_TYPE);
+
+            Configuration configuration = configurationList[TriggersTypes_Configuration_ComboBox.SelectedIndex];
+            newTriggerTypeMessage.AddParameter(configuration.GetID());
+
+            ConnectionHandler.SendMessage(stream, newTriggerTypeMessage);
+            ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+            List<TriggerType> list = TriggerType.ParseMessage(responseMessage, configuration);
+            TriggerType type = list[0];
+
+            triggerTypesList.Add(type);
+            TriggerTypes_ComboBox.Items.Add(type.GetName());
+            TriggerTypes_ComboBox.SelectedIndex = TriggerTypes_ComboBox.Items.Count - 1;
         }
 
+        private void TriggerTypes_Save_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = TriggerTypes_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            TriggerType type = triggerTypesList[index];
+            type.SetName(TriggerTypes_Name.Text);
+            type.SetDescription(TriggerTypes_Description.Text);
+
+            ProtocolMessage updateTriggerTypeMessage = new ProtocolMessage();
+            updateTriggerTypeMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_UPDATE_TRIGGER_TYPE);
+
+            updateTriggerTypeMessage.AddParameter(type.GetID());
+            updateTriggerTypeMessage.AddParameter(type.GetConfiguration().GetID());
+            updateTriggerTypeMessage.AddParameter(type.GetName());
+            updateTriggerTypeMessage.AddParameter(type.GetDescription());
+
+            ConnectionHandler.SendMessage(stream, updateTriggerTypeMessage);
+        }
+
+        private void Trigger_New_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Trigger_Available_Plugin.SelectedIndex < 0 || 
+                Trigger_Account_ComboBox.SelectedIndex < 0 || 
+                Trigger_Configuration_ComboBox.SelectedIndex < 0 ||
+                Trigger_TriggerType_ComboBox.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            ProtocolMessage newTriggerMessage = new ProtocolMessage();
+            newTriggerMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_NEW_TRIGGER);
+
+            Configuration configuration = configurationList[Trigger_Configuration_ComboBox.SelectedIndex];
+            newTriggerMessage.AddParameter(configuration.GetID());
+
+            TriggerType triggerType = triggerTypesList[Trigger_TriggerType_ComboBox.SelectedIndex];
+            newTriggerMessage.AddParameter(triggerType.GetID());
+
+            ConnectionHandler.SendMessage(stream, newTriggerMessage);
+            ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+            List<SNMS_Client.Objects.Trigger> list = SNMS_Client.Objects.Trigger.ParseMessage(responseMessage, configuration, triggerType, sequenceList);
+            SNMS_Client.Objects.Trigger trigger = list[0];
+
+            triggersList.Add(trigger);
+            Trigger_ComboBox.Items.Add(trigger.GetName());
+            Trigger_ComboBox.SelectedIndex = Trigger_ComboBox.Items.Count - 1;
+        }
+
+        private void Trigger_Save_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Trigger_ComboBox.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            SNMS_Client.Objects.Trigger trigger = triggersList[index];
+            trigger.SetName(Trigger_Name.Text);
+            trigger.SetDescription(Trigger_Description.Text);
+            trigger.SetValue(Trigger_Value.Text);
+            trigger.SetReaction(sequenceList[Trigger_Reaction_ComboBox.SelectedIndex]);
+            trigger.SetReactionValue(Trigger_Reaction_Value.Text);
+            bool enabled = false;
+            if (Trigger_Enabled_CheckBox.IsChecked.HasValue)
+            {
+                enabled = (bool)Trigger_Enabled_CheckBox.IsChecked;
+            }
+            trigger.SetEnabled(enabled);
+
+            ProtocolMessage updateTriggerMessage = new ProtocolMessage();
+            updateTriggerMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_UPDATE_TRIGGER);
+
+            updateTriggerMessage.AddParameter(trigger.GetID());
+            updateTriggerMessage.AddParameter(trigger.GetConfiguration().GetID());
+            updateTriggerMessage.AddParameter(trigger.GetTriggerType().GetID());
+            updateTriggerMessage.AddParameter(trigger.GetName());
+            updateTriggerMessage.AddParameter(trigger.GetDescription());
+            updateTriggerMessage.AddParameter(trigger.GetValue());
+            updateTriggerMessage.AddParameter(trigger.GetReaction().GetID());
+            updateTriggerMessage.AddParameter(trigger.GetReactionValue());
+            updateTriggerMessage.AddParameter(trigger.GetEnabled());
+
+            ConnectionHandler.SendMessage(stream, updateTriggerMessage);
+        }
+
+        private void User_New_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ProtocolMessage newUserMessage = new ProtocolMessage();
+            newUserMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_NEW_USER);
+
+            ConnectionHandler.SendMessage(stream, newUserMessage);
+            ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+            List<User> list = User.ParseMessage(responseMessage, userTypesList);
+            User user = list[0];
+
+            usersList.Add(user);
+            User_ComboBox.Items.Add(user.GetName());
+            User_ComboBox.SelectedIndex = User_ComboBox.Items.Count - 1;
+        }
+
+        private void User_Save_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = User_ComboBox.SelectedIndex;
+
+            User user = usersList[index];
+            user.SetName(User_Name.Text);
+            user.SetPassword(User_Password.Password);
+            user.SetUserType(userTypesList[User_Type_ComboBox.SelectedIndex]);
+            bool bTemp = false;
+            if (User_Enable_Read_CheckBox.IsChecked.HasValue)
+            {
+                bTemp = (bool)User_Enable_Read_CheckBox.IsChecked;
+            }
+            user.SetEnableRead(bTemp);
+            if (User_Enable_Write_CheckBox.IsChecked.HasValue)
+            {
+                bTemp = (bool)User_Enable_Write_CheckBox.IsChecked;
+            }
+            user.SetEnableWrite(bTemp);
+
+            ProtocolMessage updateUserMessage = new ProtocolMessage();
+            updateUserMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_UPDATE_USER);
+
+            updateUserMessage.AddParameter(user.GetID());
+            updateUserMessage.AddParameter(user.GetName());
+            updateUserMessage.AddParameter(user.GetPassword());
+            updateUserMessage.AddParameter(user.GetUserType().GetID());
+            updateUserMessage.AddParameter(user.GetEnableRead());
+            updateUserMessage.AddParameter(user.GetEnableWrite());
+
+            ConnectionHandler.SendMessage(stream, updateUserMessage);
+        }
     }
 }

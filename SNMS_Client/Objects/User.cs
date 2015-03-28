@@ -47,19 +47,21 @@ namespace SNMS_Client.Objects
             {
                 User user = new User();
 
-                int dwUserParameterOffset = 1 + dwCurrentUser * 5;
+                int dwUserParameterOffset = 1 + dwCurrentUser * 6;
 
                 user.SetID(message.GetParameterAsInt(dwUserParameterOffset));
 
                 user.SetName(message.GetParameterAsString(dwUserParameterOffset + 1));
 
-                int dwUserTypeId = message.GetParameterAsInt(dwUserParameterOffset + 2);
+                user.SetPassword(message.GetParameterAsString(dwUserParameterOffset + 2));
 
-                user.SetEnableRead(message.GetParameterAsBool(dwUserParameterOffset + 3));
+                int dwUserTypeId = message.GetParameterAsInt(dwUserParameterOffset + 3);
 
-                user.SetEnableWrite(message.GetParameterAsBool(dwUserParameterOffset + 4));
+                user.SetEnableRead(message.GetParameterAsBool(dwUserParameterOffset + 4));
 
-                user.SetPassword("");
+                user.SetEnableWrite(message.GetParameterAsBool(dwUserParameterOffset + 5));
+
+                
 
                 UserType userType = null;
                 foreach (UserType type in userTypesList)
