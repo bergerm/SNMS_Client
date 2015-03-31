@@ -34,6 +34,8 @@ namespace SNMS_Client
 
         static List<Configuration> configurationList;
 
+        static List<Variable> variableList;
+
         static List<Sequence> sequenceList;
 
         static List<TriggerType> triggerTypesList;
@@ -116,10 +118,26 @@ namespace SNMS_Client
             return true;
         }
 
+        bool LoadVariablesTab()
+        {
+            Variable_Available_Plugins.Items.Clear();
+            Variable_Account_ComboBox.SelectedIndex = -1;
+            Variable_Account_ComboBox.Items.Clear();
+            Variable_Account_ComboBox.SelectedIndex = -1;
+
+            foreach (Plugin plugin in pluginList)
+            {
+                Variable_Available_Plugins.Items.Add(plugin.GetName());
+            }
+            return true;
+        }
+
         bool LoadTriggerTypesTab()
         {
             TriggerTypes_Available_Plugins.Items.Clear();
             TriggerTypes_ComboBox.SelectedIndex = -1;
+            TriggersTypes_Account_ComboBox.Items.Clear();
+            TriggersTypes_Account_ComboBox.SelectedIndex = -1;
 
             foreach (Plugin plugin in pluginList)
             {
@@ -132,6 +150,8 @@ namespace SNMS_Client
         {
             Trigger_Available_Plugin.Items.Clear();
             Trigger_ComboBox.SelectedIndex = -1;
+            Trigger_Account_ComboBox.Items.Clear();
+            Trigger_Account_ComboBox.SelectedIndex = -1;
 
             foreach (Plugin plugin in pluginList)
             {
@@ -300,6 +320,10 @@ namespace SNMS_Client
 
                     case 5:
                         LoadUsersTab();
+                        break;
+
+                    case 8:
+                        LoadVariablesTab();
                         break;
 
                     default:
@@ -1138,5 +1162,118 @@ namespace SNMS_Client
 
             Plugins_Available_Plugins.SelectedIndex = index - 1;
         }
+
+        private void Variable_Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Variable_Account_ComboBox.SelectedIndex = -1;
+
+            if (Variable_Available_Plugins.SelectedIndex != -1)
+            {
+                int dwIndex = Variable_Available_Plugins.SelectedIndex;
+                Plugin plugin = pluginList[dwIndex];
+                int dwPluginID = plugin.GetID();
+
+                ProtocolMessage accountsMessage = new ProtocolMessage();
+                accountsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_ACCOUNTS);
+
+                accountsMessage.AddParameter(dwPluginID);
+
+                ConnectionHandler.SendMessage(stream, accountsMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                accountList = Account.ParseMessage(responseMessage, plugin);
+
+                foreach (Account account in accountList)
+                {
+                    Variable_Account_ComboBox.Items.Add(account.GetName());
+                }
+            }
+        }
+
+        private void Variable_Account_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Variable_Configuration_ComboBox.SelectedIndex = -1;
+            Variable_Configuration_ComboBox.Items.Clear();
+
+            int index = Variable_Account_ComboBox.SelectedIndex;
+            if (index != -1)
+            {
+                Account account = accountList[index];
+
+                ProtocolMessage accountsMessage = new ProtocolMessage();
+                accountsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_CONFIGURATIONS);
+
+                accountsMessage.AddParameter(account.GetID());
+
+                ConnectionHandler.SendMessage(stream, accountsMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                configurationList = Configuration.ParseMessage(responseMessage, account);
+
+                foreach (Configuration configuration in configurationList)
+                {
+                    Variable_Configuration_ComboBox.Items.Add(configuration.GetName());
+                }
+            }
+        }
+
+        private void Variable_Configuration_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Variable_ComboBox.SelectedIndex = -1;
+            Variable_ComboBox.Items.Clear();
+
+            int index = Variable_Configuration_ComboBox.SelectedIndex;
+            if (index != -1)
+            {
+                Configuration configuration = configurationList[index];
+
+                ProtocolMessage variablesMessage = new ProtocolMessage();
+                variablesMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_VARIABLES);
+
+                variablesMessage.AddParameter(configuration.GetID());
+
+                ConnectionHandler.SendMessage(stream, variablesMessage);
+                ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+                variableList = Variable.ParseMessage(responseMessage, configuration);
+
+                foreach (Variable variable in variableList)
+                {
+                    Variable_ComboBox.Items.Add(variable.GetName());
+                }
+            }
+        }
+
+        private void Variable_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = Variable_ComboBox.SelectedIndex;
+            if (index == -1)
+            {
+                Variable_Value.Text = "";
+                Variable_Type.Text = "";
+            }
+            else
+            {
+                Variable variable = variableList[index];
+                Variable_Value.Text = variable.GetVariableValue();
+                Variable_Type.Text = variable.GetVariableType();
+            }
+        }
+
+        private void Variable_Save_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Variable_ComboBox.SelectedIndex;
+
+            Variable variable = variableList[index];
+            variable.SetVariableValue(Variable_Value.Text);
+
+            ProtocolMessage updateVariableMessage = new ProtocolMessage();
+            updateVariableMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_UPDATE_VARIABLES);
+
+            updateVariableMessage.AddParameter(variable.GetID());
+            updateVariableMessage.AddParameter(variable.GetVariableValue());
+
+            ConnectionHandler.SendMessage(stream, updateVariableMessage);
+        }  
     }
 }
