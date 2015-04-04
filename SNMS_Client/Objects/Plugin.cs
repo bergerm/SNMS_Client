@@ -37,6 +37,11 @@ namespace SNMS_Client.Objects
 
         public static List<Plugin> ParseMessage(ProtocolMessage message)
         {
+            if (message == null)
+            {
+                return null;
+            }
+
             List<Plugin> pluginList = new List<Plugin>();
 
             byte[] arr = null;
