@@ -11,7 +11,8 @@ namespace SNMS_Client.Connection
 {
     abstract class ConnectionHandler
     {
-        private const int CONNECTION_TIMEOUT = 300000;
+        //private const int CONNECTION_TIMEOUT = 300000;
+        private const int CONNECTION_TIMEOUT = -1;
 
         public static ProtocolMessage GetMessage(Stream stream)
         {
@@ -39,19 +40,28 @@ namespace SNMS_Client.Connection
             }
             catch (Exception e)
             {
+                Environment.Exit(1);
                 return null;
             }
         }
 
         public static void SendMessage(Stream stream, ProtocolMessage message)
         {
-            byte[] response = Protocol.CraftMessage(message);
-            byte[] responseSize = BitConverter.GetBytes(response.Length);
-            // Send message size
-            stream.Write(responseSize, 0, 4);
-            // Send message
-            stream.Write(response, 0, response.Length);
-            stream.Flush();
+            try
+            {
+                byte[] response = Protocol.CraftMessage(message);
+                byte[] responseSize = BitConverter.GetBytes(response.Length);
+                // Send message size
+                stream.Write(responseSize, 0, 4);
+                // Send message
+                stream.Write(response, 0, response.Length);
+                stream.Flush();
+            }
+            catch (Exception e)
+            {
+                Environment.Exit(1);
+                return;
+            }
         }
     }
 }

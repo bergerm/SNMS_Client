@@ -1,7 +1,12 @@
-﻿<Window x:Class="SNMS_Client.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Social Network Manipulation System" Height="700" Width="1300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FF746F6F">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Objects="clr-namespace:SNMS_Client.Objects" mc:Ignorable="d" x:Class="SNMS_Client.MainWindow"
+        Title="Social Network Manipulation System" Height="700" Width="1300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FF746F6F" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="logsControlViewSource" d:DesignSource="{d:DesignInstance {x:Type Objects:LogsControl}, CreateList=True}"/>
+        <CollectionViewSource x:Key="logViewSource" d:DesignSource="{d:DesignInstance {x:Type Objects:Log}, CreateList=True}"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -148,7 +153,19 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Logs" VerticalAlignment="Bottom" Margin="62,0,-66,0">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="LogDataGrid" ItemsSource="{Binding logList, Mode=OneWay}" AutoGenerateColumns="False" SelectionUnit="Cell" AlternationCount="2" AlternatingRowBackground="#FFC7C5C5" Margin="10">
+                            <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Time" Binding="{Binding Time, Mode=OneWay}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Component" Binding="{Binding Component, Mode=OneWay}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="UserName" Binding="{Binding UserName, Mode=OneWay}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Log Type" Binding="{Binding LogType, Mode=OneWay}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Message" Binding="{Binding LogMessage, Mode=OneWay}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Link" Binding="{Binding LogLink, Mode=OneWay}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                        </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem Header="Variables" VerticalAlignment="Bottom" Margin="-291,0,287,0">
                 <Grid Background="#FFE5E5E5">

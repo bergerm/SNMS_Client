@@ -49,6 +49,8 @@ namespace SNMS_Client
         static TcpClient client;
         static NetworkStream stream;
 
+        List<Log> logList;
+
         public MainWindow()
         {
             pluginList = new List<Plugin>();
@@ -193,11 +195,20 @@ namespace SNMS_Client
             return true;
         }
 
+        bool LoadLogsTab()
+        {
+            logList = LogsControl.GetLogs(stream);
+            LogDataGrid.ItemsSource = null;
+            LogDataGrid.ItemsSource = logList;
+            return true;
+        }
+
         bool LoadStartValues()
         {
             try
             {
                 ConnectionProcedure();
+                LogDataGrid.ItemsSource = logList;
                 //LoadPluginsTab();
             }
             catch (Exception e)
@@ -320,6 +331,10 @@ namespace SNMS_Client
 
                     case 5:
                         LoadUsersTab();
+                        break;
+
+                    case 7:
+                        LoadLogsTab();
                         break;
 
                     case 8:
@@ -1274,6 +1289,15 @@ namespace SNMS_Client
             updateVariableMessage.AddParameter(variable.GetVariableValue());
 
             ConnectionHandler.SendMessage(stream, updateVariableMessage);
-        }  
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            System.Windows.Data.CollectionViewSource logViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("logViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // logViewSource.Source = [generic data source]
+        }
+ 
     }
 }
