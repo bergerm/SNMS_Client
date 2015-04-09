@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.IO;
 
+using System.Windows;
+using System.Windows.Threading;
+using Microsoft.Win32;
+
 namespace SNMS_Client.Connection
 {
     abstract class ConnectionHandler

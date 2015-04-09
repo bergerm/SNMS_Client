@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 using System.IO;
 using System.Net.Sockets;
@@ -1176,6 +1177,7 @@ namespace SNMS_Client
             ConnectionHandler.SendMessage(stream, deletePluginMessage);
 
             Plugins_Available_Plugins.SelectedIndex = index - 1;
+            Plugins_Available_Plugins.Items.Remove(index);
         }
 
         private void Variable_Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1291,12 +1293,103 @@ namespace SNMS_Client
             ConnectionHandler.SendMessage(stream, updateVariableMessage);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+        //private void Window_Loaded(object sender, RoutedEventArgs e)
+        //{
 
-            System.Windows.Data.CollectionViewSource logViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("logViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // logViewSource.Source = [generic data source]
+        //    System.Windows.Data.CollectionViewSource logViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("logViewSource")));
+        //    // Load data by setting the CollectionViewSource.Source property:
+        //    // logViewSource.Source = [generic data source]
+        //}
+
+        private void BrowsePluginButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                PluginPath.Text = openFileDialog.FileName;
+            }
+            else
+            {
+                PluginPath.Text = "";
+            }
+        }
+
+        private void AddPluginButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProtocolMessage newPluginMessage = new ProtocolMessage();
+            newPluginMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_NEW_PLUGIN);
+
+            string sPluginPath = PluginPath.Text;
+            if (sPluginPath == "")
+            {
+                return;
+            }
+
+            if (!File.Exists(sPluginPath))
+            {
+                MessageBox.Show("Selected file does not exist.");
+                return;
+            }
+
+            string sPluginName = System.IO.Path.GetFileName(sPluginPath);
+
+            newPluginMessage.AddParameter(sPluginName);
+
+            byte[] array = File.ReadAllBytes(sPluginPath);
+            int dwArraySize = array.Length;
+
+            newPluginMessage.AddParameter(array, dwArraySize);
+
+            ConnectionHandler.SendMessage(stream, newPluginMessage);
+
+            ProtocolMessage responseMessage = ConnectionHandler.GetMessage(stream);
+
+            int dwNumOfPlugins = responseMessage.GetParameterAsInt(0);
+            if (dwNumOfPlugins == 0)
+            {
+                string sErrorMessage = "Error on plugin: " + responseMessage.GetParameterAsString(1);
+                MessageBox.Show(sErrorMessage);
+                return;
+            }
+
+            List<Plugin> plugins = Plugin.ParseMessage(responseMessage);
+            if (plugins == null || plugins.Count == 0)
+            {
+                MessageBox.Show("There is a unknown problem on the selected plugin. Please contact the system's administrator");
+                return;
+            }
+
+            PluginPath.Text = "";
+
+            Plugin plugin = plugins[0];
+            pluginList.Add(plugin);
+            Plugins_Available_Plugins.Items.Add(plugin.GetName());
+            Plugins_Available_Plugins.SelectedIndex = Plugins_Available_Plugins.Items.Count - 1;
+        }
+
+        private void Plugin_Save_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Plugins_Available_Plugins.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            bool bEnabled = (Plugin_Enable_Button.Content == "Enabled") ? true : false;
+            Plugin plugin = pluginList[index];
+            plugin.SetName(Plugin_Name.Text);
+            plugin.SetDescription(Plugin_Description.Text);
+            plugin.SetEnabled(bEnabled);
+
+            ProtocolMessage updatePluginMessage = new ProtocolMessage();
+            updatePluginMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_UPDATE_PLUGIN);
+
+            updatePluginMessage.AddParameter(plugin.GetID());
+            updatePluginMessage.AddParameter(plugin.GetName());
+            updatePluginMessage.AddParameter(plugin.GetDescription());
+            updatePluginMessage.AddParameter(plugin.GetEnabled());
+
+            ConnectionHandler.SendMessage(stream, updatePluginMessage);
         }
  
     }

@@ -53,18 +53,15 @@ namespace SNMS_Client.Objects
             for (dwCurrentPlugin = 0; dwCurrentPlugin < numOfPlugins; dwCurrentPlugin++)
             {
                 Plugin plugin = new Plugin();
-                int dwPluginParameterOffset = 1 + dwCurrentPlugin * 5;
+                int dwPluginParameterOffset = 1 + dwCurrentPlugin * 4;
 
-                message.GetParameter(ref arr, dwPluginParameterOffset);
-                plugin.SetID(BitConverter.ToInt32(arr, 0));
+                plugin.SetID(message.GetParameterAsInt(dwPluginParameterOffset));
 
                 plugin.SetName(message.GetParameterAsString(dwPluginParameterOffset + 1));
 
                 plugin.SetDescription(message.GetParameterAsString(dwPluginParameterOffset + 2));
 
-                message.GetParameter(ref arr, dwPluginParameterOffset + 3);
-                int isEnabled = BitConverter.ToInt32(arr, 0);
-                plugin.SetEnabled((isEnabled != 0)?true:false);
+                plugin.SetEnabled(message.GetParameterAsBool(dwPluginParameterOffset + 3));
 
                 pluginList.Add(plugin);
             }
