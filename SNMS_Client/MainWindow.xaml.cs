@@ -57,7 +57,13 @@ namespace SNMS_Client
             pluginList = new List<Plugin>();
             InitializeComponent();
             LoadStartValues();
-            //Available_Plugins;
+            Main_Tab_Controller.SelectedIndex = 0;
+
+            this.Hide();
+            Window loginWindow = new LoginScreen(this,stream);
+            loginWindow.ShowDialog();
+
+            this.Show();
         }
 
         bool ConnectionProcedure()
@@ -1390,6 +1396,29 @@ namespace SNMS_Client
             updatePluginMessage.AddParameter(plugin.GetEnabled());
 
             ConnectionHandler.SendMessage(stream, updatePluginMessage);
+        }
+
+        public void SetUserType(string sUserType)
+        {
+            switch (sUserType)
+            {
+                case "operator":
+                    PluginsTab.Visibility = Visibility.Hidden;
+                    UsersTab.Visibility = Visibility.Hidden;
+                    Main_Tab_Controller.SelectedIndex = 1;
+                    break;
+
+                case "admin":
+                    PluginsTab.Visibility = Visibility.Visible;
+                    UsersTab.Visibility = Visibility.Visible;
+                    Main_Tab_Controller.SelectedIndex = 0;
+                    break;
+
+                default:
+                    MessageBox.Show("Incorrect user type received from server. Program will exit.");
+                    Environment.Exit(1);
+                    break;
+            }
         }
  
     }
