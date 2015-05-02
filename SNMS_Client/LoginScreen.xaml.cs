@@ -71,6 +71,8 @@ namespace SNMS_Client
                     break;
             }
 
+            m_mainWindow.LoggedIn();
+
             this.Close();
         }
     }

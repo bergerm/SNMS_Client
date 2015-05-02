@@ -44,6 +44,7 @@ namespace SNMS_Client.Connection
             }
             catch (Exception e)
             {
+                MessageBox.Show("Connection to data service lost. Program will be closed.", "Connection to data service lost");
                 Environment.Exit(1);
                 return null;
             }
@@ -63,6 +64,7 @@ namespace SNMS_Client.Connection
             }
             catch (Exception e)
             {
+                MessageBox.Show("Connection to data service lost. Program will be closed.", "Connection to data service lost");
                 Environment.Exit(1);
                 return;
             }

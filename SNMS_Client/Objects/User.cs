@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 using SNMS_Client.Connection;
 
@@ -25,6 +26,21 @@ namespace SNMS_Client.Objects
 
         public void SetPassword(string sPassword) { m_sPassword = sPassword; }
         public string GetPassword() { return m_sPassword; }
+        public string GetHashedPassword()
+        {
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(m_sPassword);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("x2"));
+            }
+            string sHashedPassword = sb.ToString();
+
+            return sHashedPassword;
+        }
 
         public void SetUserType(UserType type) { m_userType = type; }
         public UserType GetUserType() { return m_userType; }

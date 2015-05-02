@@ -52,6 +52,13 @@ namespace SNMS_Client
 
         List<Log> logList;
 
+        bool bLoggedIn;
+
+        public void LoggedIn()
+        {
+            bLoggedIn = true;
+        }
+
         public MainWindow()
         {
             pluginList = new List<Plugin>();
@@ -60,8 +67,14 @@ namespace SNMS_Client
             Main_Tab_Controller.SelectedIndex = 0;
 
             this.Hide();
+            bLoggedIn = false;
             Window loginWindow = new LoginScreen(this,stream);
             loginWindow.ShowDialog();
+
+            if (bLoggedIn == false)
+            {
+                Application.Current.Shutdown();
+            }
 
             this.Show();
         }
@@ -224,6 +237,24 @@ namespace SNMS_Client
             }
 
             return true;
+        }
+
+        bool PromptUserForDeleteAction(string sItemType, string sItemName)
+        {
+            string sMessageBoxText = "Are you sure you want to delete the " + sItemType + ": " + sItemName + "?";
+            string sCaption = "Are you sure?";
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            if (rsltMessageBox == MessageBoxResult.Yes)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void Plugins_Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -750,7 +781,8 @@ namespace SNMS_Client
                 User user = usersList[dwIndex];
 
                 User_Name.Text = user.GetName();
-                User_Password.Password = user.GetPassword();
+                //User_Password.Password = user.GetPassword();
+                User_Password.Password = "";
                 User_Enable_Read_CheckBox.IsChecked = user.GetEnableRead();
                 User_Enable_Write_CheckBox.IsChecked = user.GetEnableWrite();
 
@@ -1042,6 +1074,12 @@ namespace SNMS_Client
         {
             int index = User_ComboBox.SelectedIndex;
 
+            if (User_Password.Password == "")
+            {
+                MessageBox.Show("Cannot save user without password");
+                return;
+            }
+
             User user = usersList[index];
             user.SetName(User_Name.Text);
             user.SetPassword(User_Password.Password);
@@ -1063,7 +1101,7 @@ namespace SNMS_Client
 
             updateUserMessage.AddParameter(user.GetID());
             updateUserMessage.AddParameter(user.GetName());
-            updateUserMessage.AddParameter(user.GetPassword());
+            updateUserMessage.AddParameter(user.GetHashedPassword());
             updateUserMessage.AddParameter(user.GetUserType().GetID());
             updateUserMessage.AddParameter(user.GetEnableRead());
             updateUserMessage.AddParameter(user.GetEnableWrite());
@@ -1080,6 +1118,11 @@ namespace SNMS_Client
             }
 
             User user = usersList[index];
+
+            if (!PromptUserForDeleteAction("user", user.GetName()))
+            {
+                return;
+            }
 
             ProtocolMessage deleteUserMessage = new ProtocolMessage();
             deleteUserMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_USER);
@@ -1100,6 +1143,11 @@ namespace SNMS_Client
 
             SNMS_Client.Objects.Trigger trigger = triggersList[index];
 
+            if (!PromptUserForDeleteAction("trigger", trigger.GetName()))
+            {
+                return;
+            }
+
             ProtocolMessage deleteTriggerMessage = new ProtocolMessage();
             deleteTriggerMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_TRIGGER);
             deleteTriggerMessage.AddParameter(trigger.GetID());
@@ -1118,6 +1166,11 @@ namespace SNMS_Client
             }
 
             TriggerType type = triggerTypesList[index];
+
+            if (!PromptUserForDeleteAction("trigger type", type.GetName()))
+            {
+                return;
+            }
 
             ProtocolMessage deleteTriggerTypeMessage = new ProtocolMessage();
             deleteTriggerTypeMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_TRIGGER_TYPE);
@@ -1138,6 +1191,11 @@ namespace SNMS_Client
 
             Configuration configuration = configurationList[index];
 
+            if (!PromptUserForDeleteAction("configuration", configuration.GetName()))
+            {
+                return;
+            }
+
             ProtocolMessage deleteConfigurationMessage = new ProtocolMessage();
             deleteConfigurationMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_CONFIGURATION);
             deleteConfigurationMessage.AddParameter(configuration.GetID());
@@ -1157,6 +1215,11 @@ namespace SNMS_Client
 
             Account account = accountList[index];
 
+            if ( !PromptUserForDeleteAction("account", account.GetName()) )
+            {
+                return;
+            }
+
             ProtocolMessage deleteAccountMessage = new ProtocolMessage();
             deleteAccountMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_ACCOUNT);
             deleteAccountMessage.AddParameter(account.GetID());
@@ -1175,6 +1238,11 @@ namespace SNMS_Client
             }
 
             Plugin plugin = pluginList[index];
+
+            if (!PromptUserForDeleteAction("plugin", plugin.GetName()))
+            {
+                return;
+            }
 
             ProtocolMessage deletePluginMessage = new ProtocolMessage();
             deletePluginMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_DELETE_PLUGIN);
@@ -1405,12 +1473,14 @@ namespace SNMS_Client
                 case "operator":
                     PluginsTab.Visibility = Visibility.Hidden;
                     UsersTab.Visibility = Visibility.Hidden;
+                    TriggerTypesTab.Visibility = Visibility.Hidden;
                     Main_Tab_Controller.SelectedIndex = 1;
                     break;
 
                 case "admin":
                     PluginsTab.Visibility = Visibility.Visible;
                     UsersTab.Visibility = Visibility.Visible;
+                    TriggerTypesTab.Visibility = Visibility.Visible;
                     Main_Tab_Controller.SelectedIndex = 0;
                     break;
 

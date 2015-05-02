@@ -15,7 +15,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TabControl x:Name="Main_Tab_Controller" HorizontalAlignment="Left" Height="671" Margin="0,0,-1176,-639" VerticalAlignment="Top" Width="1294" SelectionChanged="Main_Tab_Controller_SelectionChanged">
-            <TabItem x:Name="PluginsTab" Header="Plugins" VerticalAlignment="Bottom" Margin="482,0,-486,0">
+            <TabItem x:Name="PluginsTab" Header="Plugins" VerticalAlignment="Bottom" Margin="486,0,-490,0">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="Plugins_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Plugins_Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
@@ -75,7 +75,7 @@
                     <CheckBox x:Name="Configuration_Sequence_Enabled_CheckBox" Content="" HorizontalAlignment="Left" Margin="653,482,0,0" VerticalAlignment="Top" Height="16" Width="17" Checked="Configuration_Sequence_Enabled_CheckBox_Checked" Unchecked="Configuration_Sequence_Enabled_CheckBox_Checked"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TriggerTypesTab" Header="Trigger Types" Margin="18,0,-22,0" VerticalAlignment="Bottom">
+            <TabItem x:Name="TriggerTypesTab" Header="Trigger Types" Margin="197,0,-201,0" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="TriggerTypes_Available_Plugins" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="TriggerTypes_Available_Plugins_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
@@ -95,7 +95,7 @@
                     <Label Content="Account" HorizontalAlignment="Left" Margin="414,86,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="TriggersTab" Header="Triggers" Margin="21,0,-25,0" VerticalAlignment="Bottom">
+            <TabItem x:Name="TriggersTab" Header="Triggers" Margin="-64,0,60,0" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="Trigger_Available_Plugin" HorizontalAlignment="Left" Height="560" Margin="10,58,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="Trigger_Available_Plugin_SelectionChanged"/>
                     <Label Content="AVAILABLE PLUGINS" HorizontalAlignment="Left" Margin="43,15,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Arial Black"/>
@@ -125,7 +125,7 @@
                     <Label Content="Account" HorizontalAlignment="Left" Margin="414,73,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="UsersTab" Header="Users" VerticalAlignment="Bottom" Margin="193,0,-193,0">
+            <TabItem x:Name="UsersTab" Header="Users" VerticalAlignment="Bottom" Margin="197,0,-197,0">
                 <Grid Background="#FFE5E5E5">
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="200,36,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                     <Button x:Name="User_Delete_Button" Content="Delete" HorizontalAlignment="Left" Margin="961,524,0,73" VerticalAlignment="Center" Width="94" FontSize="24" Height="46" FontWeight="Bold" Click="User_Delete_Button_Click"/>
@@ -137,24 +137,25 @@
                     <Label Content="User" HorizontalAlignment="Left" Margin="226,70,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
                     <ComboBox x:Name="User_Type_ComboBox" HorizontalAlignment="Left" Margin="462,285,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="User Type" HorizontalAlignment="Left" Margin="226,281,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <Label Content="Enable Read Actions" HorizontalAlignment="Left" Margin="496,367,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <CheckBox x:Name="User_Enable_Read_CheckBox" Content="" HorizontalAlignment="Left" Margin="761,383,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                    <Label Content="Enable Read Actions" HorizontalAlignment="Left" Margin="496,367,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Hidden"/>
+                    <CheckBox x:Name="User_Enable_Read_CheckBox" Content="" HorizontalAlignment="Left" Margin="761,383,0,0" VerticalAlignment="Top" Height="16" Width="16" Visibility="Hidden"/>
                     <PasswordBox x:Name="User_Password" HorizontalAlignment="Left" Margin="462,194,0,0" VerticalAlignment="Top" Width="593" FontSize="24"/>
                     <Label Content="Password" HorizontalAlignment="Left" Margin="226,190,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <Label Content="Enable Write Actions" HorizontalAlignment="Left" Margin="496,416,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <CheckBox x:Name="User_Enable_Write_CheckBox" Content="" HorizontalAlignment="Left" Margin="761,432,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                    <Label Content="Enable Write Actions" HorizontalAlignment="Left" Margin="496,416,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Visibility="Hidden"/>
+                    <CheckBox x:Name="User_Enable_Write_CheckBox" Content="" HorizontalAlignment="Left" Margin="761,432,0,0" VerticalAlignment="Top" Height="16" Width="16" Visibility="Hidden"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="ConnectionsTab" Header="Connection" Margin="25,0,-29,0" VerticalAlignment="Bottom">
+            <TabItem x:Name="ConnectionsTab" Header="Connection" Margin="-60,0,56,0" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5">
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="200,36,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                     <Label Content="Server Status" HorizontalAlignment="Left" Margin="217,48,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-                    <CheckBox Content="" HorizontalAlignment="Left" Margin="380,64,0,0" VerticalAlignment="Top" Height="16" Width="16"/>
+                    <CheckBox Content="" HorizontalAlignment="Left" Margin="380,64,0,0" VerticalAlignment="Top" Height="16" Width="16" IsChecked="True"/>
+                    <TextBox x:Name="Connection_Status_Textbox" HorizontalAlignment="Left" Height="476" Margin="217,100,0,0" TextWrapping="Wrap" Text="Server Status ............................ OK" VerticalAlignment="Top" Width="847" FontSize="24"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="LogsTab" Header="Logs" VerticalAlignment="Bottom" Margin="-89,0,85,0">
+            <TabItem x:Name="LogsTab" Header="Logs" VerticalAlignment="Bottom" Margin="-174,0,170,0">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="LogDataGrid" ItemsSource="{Binding logList, Mode=OneWay}" AutoGenerateColumns="False" SelectionUnit="Cell" AlternationCount="2" AlternatingRowBackground="#FFC7C5C5" Margin="10">
+                    <DataGrid x:Name="LogDataGrid" ItemsSource="{Binding logList, Mode=OneWay}" AutoGenerateColumns="False" SelectionUnit="Cell" AlternationCount="2" AlternatingRowBackground="#FFC7C5C5" Margin="10,49,10,10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Time" Binding="{Binding Time, Mode=OneWay}"></DataGridTextColumn>
@@ -165,6 +166,17 @@
                             <DataGridTextColumn Header="Link" Binding="{Binding LogLink, Mode=OneWay}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <TextBox HorizontalAlignment="Left" Height="24" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Component" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="74"/>
+                    <TextBox HorizontalAlignment="Left" Height="24" Margin="140,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="User Name" HorizontalAlignment="Left" Margin="135,0,0,0" VerticalAlignment="Top" Width="74"/>
+                    <TextBox HorizontalAlignment="Left" Height="24" Margin="270,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Log Type" HorizontalAlignment="Left" Margin="265,0,0,0" VerticalAlignment="Top" Width="74"/>
+                    <TextBox HorizontalAlignment="Left" Height="24" Margin="400,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="467"/>
+                    <Label Content="Message" HorizontalAlignment="Left" Margin="395,0,0,0" VerticalAlignment="Top" Width="74"/>
+                    <TextBox HorizontalAlignment="Left" Height="24" Margin="877,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="286"/>
+                    <Label Content="Link" HorizontalAlignment="Left" Margin="872,0,0,0" VerticalAlignment="Top" Width="74"/>
+                    <Button x:Name="Logs_Refresh_Button" Content="Refresh" HorizontalAlignment="Left" Margin="1179,20,0,0" VerticalAlignment="Top" Width="99" Height="24"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="VariablesTab" Header="Variables" VerticalAlignment="Bottom" Margin="-334,0,330,0">
