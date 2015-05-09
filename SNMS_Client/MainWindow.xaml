@@ -145,7 +145,7 @@
                     <CheckBox x:Name="User_Enable_Write_CheckBox" Content="" HorizontalAlignment="Left" Margin="761,432,0,0" VerticalAlignment="Top" Height="16" Width="16" Visibility="Hidden"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="ConnectionsTab" Header="Connection" Margin="-60,0,56,0" VerticalAlignment="Bottom">
+            <TabItem x:Name="ConnectionsTab" Header="Connection" Margin="-60,0,56,0">
                 <Grid Background="#FFE5E5E5">
                     <Rectangle HorizontalAlignment="Left" Height="560" Margin="200,36,0,0" VerticalAlignment="Top" Width="881" Fill="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                     <Label Content="Server Status" HorizontalAlignment="Left" Margin="217,48,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>

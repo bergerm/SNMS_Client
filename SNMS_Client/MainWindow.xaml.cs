@@ -223,6 +223,50 @@ namespace SNMS_Client
             return true;
         }
 
+        bool LoadConnectionsTab()
+        {
+            ProtocolMessage getConnectionsMessage = new ProtocolMessage();
+            getConnectionsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_CONFIGURATIONS_STATUS);
+            ConnectionHandler.SendMessage(stream, getConnectionsMessage);
+
+            ProtocolMessage response = ConnectionHandler.GetMessage(stream);
+
+            string sConnectionLog = "";
+
+            int numOfConnections = response.GetParameterAsInt(0);
+
+            for (int currentConnection = 0; currentConnection < numOfConnections; currentConnection++)
+            {
+                int parameterOffset = 1 + 4 * currentConnection;
+                int configurationId = response.GetParameterAsInt(parameterOffset);
+                string configurationName = response.GetParameterAsString(parameterOffset + 1);
+                string status = response.GetParameterAsString(parameterOffset + 2);
+                bool expired = response.GetParameterAsBool(parameterOffset + 3);
+
+                string sLine = configurationName + " ";
+                for (int i = sLine.Length; i < 90; i++)
+                {
+                    sLine = sLine + ".";
+                }
+                sLine = sLine + " ";
+
+                if (!expired)
+                {
+                    sLine = sLine + status;
+                }
+                else
+                {
+                    sLine = sLine + "EXPIRED";
+                }
+
+                sConnectionLog = sConnectionLog + sLine + "\n";
+            }
+
+            Connection_Status_Textbox.Text = sConnectionLog;
+
+            return true;
+        }
+
         bool LoadStartValues()
         {
             try
@@ -369,6 +413,10 @@ namespace SNMS_Client
 
                     case 5:
                         LoadUsersTab();
+                        break;
+
+                    case 6:
+                        LoadConnectionsTab();
                         break;
 
                     case 7:
@@ -1202,7 +1250,11 @@ namespace SNMS_Client
 
             ConnectionHandler.SendMessage(stream, deleteConfigurationMessage);
 
-            Configuration_ComboBox.SelectedIndex = index - 1;
+            int confTemp = Configuration_ComboBox.SelectedIndex = index - 1;
+            int accTemp = Configuration_Account_ComboBox.SelectedIndex;
+            Configuration_Account_ComboBox.SelectedIndex = -1;
+            Configuration_Account_ComboBox.SelectedIndex = accTemp;
+            Configuration_ComboBox.SelectedIndex = confTemp;
         }
 
         private void Account_Delete_Button_Click(object sender, RoutedEventArgs e)
@@ -1226,7 +1278,11 @@ namespace SNMS_Client
 
             ConnectionHandler.SendMessage(stream, deleteAccountMessage);
 
-            Account_ComboBox.SelectedIndex = index - 1;
+            int accTemp = Account_ComboBox.SelectedIndex = index - 1;
+            int pluginTemp = Accounts_Available_Plugins.SelectedIndex;
+            Accounts_Available_Plugins.SelectedIndex = -1;
+            Accounts_Available_Plugins.SelectedIndex = pluginTemp;
+            Account_ComboBox.SelectedIndex = accTemp;
         }
 
         private void Plugin_Delete_Button_Click(object sender, RoutedEventArgs e)

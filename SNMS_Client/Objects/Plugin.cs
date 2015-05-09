@@ -44,9 +44,7 @@ namespace SNMS_Client.Objects
 
             List<Plugin> pluginList = new List<Plugin>();
 
-            byte[] arr = null;
-            message.GetParameter(ref arr, 0);
-            int numOfPlugins = BitConverter.ToInt32(arr, 0);
+            int numOfPlugins = message.GetParameterAsInt(0);
 
             int dwCurrentPlugin = 0;
 
