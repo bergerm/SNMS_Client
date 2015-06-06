@@ -436,6 +436,7 @@ namespace SNMS_Client
         private void Configuration_Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Configuration_Account_ComboBox.SelectedIndex = -1;
+            Configuration_Account_ComboBox.Items.Clear();
  
             if (Configuration_Available_Plugins.SelectedIndex != -1)
             {
@@ -1313,6 +1314,7 @@ namespace SNMS_Client
         private void Variable_Available_Plugins_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Variable_Account_ComboBox.SelectedIndex = -1;
+            Variable_Account_ComboBox.Items.Clear();
 
             if (Variable_Available_Plugins.SelectedIndex != -1)
             {
