@@ -166,17 +166,17 @@
                             <DataGridTextColumn Header="Link" Binding="{Binding LogLink, Mode=OneWay}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBox HorizontalAlignment="Left" Height="24" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="LogComponentFilter" HorizontalAlignment="Left" Height="24" Margin="10,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Component" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="74"/>
-                    <TextBox HorizontalAlignment="Left" Height="24" Margin="140,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="LogUserNameFilter" HorizontalAlignment="Left" Height="24" Margin="140,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Label Content="User Name" HorizontalAlignment="Left" Margin="135,0,0,0" VerticalAlignment="Top" Width="74"/>
-                    <TextBox HorizontalAlignment="Left" Height="24" Margin="270,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="LogTypeFilter" HorizontalAlignment="Left" Height="24" Margin="270,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Log Type" HorizontalAlignment="Left" Margin="265,0,0,0" VerticalAlignment="Top" Width="74"/>
-                    <TextBox HorizontalAlignment="Left" Height="24" Margin="400,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="467"/>
+                    <TextBox x:Name="LogMessageFilter" HorizontalAlignment="Left" Height="24" Margin="400,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="467"/>
                     <Label Content="Message" HorizontalAlignment="Left" Margin="395,0,0,0" VerticalAlignment="Top" Width="74"/>
-                    <TextBox HorizontalAlignment="Left" Height="24" Margin="877,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="286"/>
+                    <TextBox x:Name="LogLinkFilter" HorizontalAlignment="Left" Height="24" Margin="877,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="286"/>
                     <Label Content="Link" HorizontalAlignment="Left" Margin="872,0,0,0" VerticalAlignment="Top" Width="74"/>
-                    <Button x:Name="Logs_Refresh_Button" Content="Refresh" HorizontalAlignment="Left" Margin="1179,20,0,0" VerticalAlignment="Top" Width="99" Height="24"/>
+                    <Button x:Name="Logs_Refresh_Button" Content="Refresh" HorizontalAlignment="Left" Margin="1179,20,0,0" VerticalAlignment="Top" Width="99" Height="24" Click="Logs_Refresh_Button_Click"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="VariablesTab" Header="Variables" VerticalAlignment="Bottom" Margin="-334,0,330,0">

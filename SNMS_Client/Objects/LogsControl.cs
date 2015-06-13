@@ -11,10 +11,21 @@ namespace SNMS_Client.Objects
 {
     class LogsControl
     {
-        static public List<Log> GetLogs(NetworkStream stream)
+        static public List<Log> GetLogs(    NetworkStream stream, 
+                                            string sComponentFilter,
+                                            string sUserNameFilter,
+                                            string sLogType,
+                                            string sMessage,
+                                            string sLink)
         {
             ProtocolMessage getLogsMessage = new ProtocolMessage();
             getLogsMessage.SetMessageType(ProtocolMessageType.PROTOCOL_MESSAGE_GET_LAST_100_LOGS);
+
+            getLogsMessage.AddParameter(sComponentFilter);
+            getLogsMessage.AddParameter(sUserNameFilter);
+            getLogsMessage.AddParameter(sLogType);
+            getLogsMessage.AddParameter(sMessage);
+            getLogsMessage.AddParameter(sLink);
 
             ConnectionHandler.SendMessage(stream, getLogsMessage);
 

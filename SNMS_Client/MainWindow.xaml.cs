@@ -217,7 +217,18 @@ namespace SNMS_Client
 
         bool LoadLogsTab()
         {
-            logList = LogsControl.GetLogs(stream);
+            LogComponentFilter.Text = "";
+            LogUserNameFilter.Text = "";
+            LogTypeFilter.Text = "";
+            LogMessageFilter.Text = "";
+            LogLinkFilter.Text = "";
+            
+            logList = LogsControl.GetLogs(  stream,
+                                            LogComponentFilter.Text,
+                                            LogUserNameFilter.Text,
+                                            LogTypeFilter.Text,
+                                            LogMessageFilter.Text,
+                                            LogLinkFilter.Text);
             LogDataGrid.ItemsSource = null;
             LogDataGrid.ItemsSource = logList;
             return true;
@@ -1547,6 +1558,18 @@ namespace SNMS_Client
                     Environment.Exit(1);
                     break;
             }
+        }
+
+        private void Logs_Refresh_Button_Click(object sender, RoutedEventArgs e)
+        {
+            logList = LogsControl.GetLogs(stream,
+                                            LogComponentFilter.Text,
+                                            LogUserNameFilter.Text,
+                                            LogTypeFilter.Text,
+                                            LogMessageFilter.Text,
+                                            LogLinkFilter.Text);
+            LogDataGrid.ItemsSource = null;
+            LogDataGrid.ItemsSource = logList;
         }
  
     }
